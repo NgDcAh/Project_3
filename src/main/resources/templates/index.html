@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="https://www.thymeleaf.org/">
+
+<head th:replace="~{/fragments::header}"></head>
+
+<body id="page-top">
+
+	<!-- Page Wrapper -->
+	<div id="wrapper">
+
+		<!-- Sidebar -->
+		<ul th:replace="~{/fragments::sidebar}">
+		</ul>
+		<!-- End of Sidebar -->
+
+		<!-- Content Wrapper -->
+		<div id="content-wrapper" class="d-flex flex-column">
+
+			<!-- Main Content -->
+			<div id="content">
+
+				<!-- Topbar -->
+				<nav th:replace="~{/fragments::topbar}"></nav>
+				<!-- End of Topbar -->
+
+				<!-- Begin Page Content -->
+				<div class="container-fluid">
+
+					<div class="d-sm-flex align-items-center justify-content-between mb-4">
+						<h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+					</div>
+
+					<!-- Content Row -->
+					<div class="row">
+
+						<!-- Earnings (Monthly) Card Example -->
+						<div style="flex: 0 0 20% !important;" class="col-xl-auto col-md-6 mb-4">
+							<div class="card border-left-primary shadow h-100 py-2">
+								<div class="card-body">
+									<div class="row no-gutters align-items-center">
+										<div class="col mr-2">
+											<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+												Investment</div>
+											<div th:text="'$' + ${investment}"
+												class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
+										</div>
+										<div class="col-auto">
+											<i class="fas fa-calendar fa-2x text-gray-300"></i>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Earnings (Monthly) Card Example -->
+						<div style="flex: 0 0 20% !important;" class="col-xl-auto col-md-6 mb-4">
+							<div class="card border-left-success shadow h-100 py-2">
+								<div class="card-body">
+									<div class="row no-gutters align-items-center">
+										<div class="col mr-2">
+											<div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+												Revenue</div>
+											<div th:text="'$' + ${revenue}"
+												class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
+										</div>
+										<div class="col-auto">
+											<i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Earnings (Monthly) Card Example -->
+						<div style="flex: 0 0 20% !important;" class="col-xl-auto col-md-6 mb-4">
+							<div class="card border-left-info shadow h-100 py-2">
+								<div class="card-body">
+									<div class="row no-gutters align-items-center">
+										<div class="col mr-2">
+											<div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+												Total Sold Products
+											</div>
+											<div th:text="${totalSoldProducts}"
+												class="h5 mb-0 font-weight-bold text-gray-800">215,000</div>
+										</div>
+										<div class="col-auto">
+											<i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Pending Requests Card Example -->
+						<div style="flex: 0 0 20% !important;" class="col-xl-auto col-md-6 mb-4">
+							<div class="card border-left-warning shadow h-100 py-2">
+								<div class="card-body">
+									<div class="row no-gutters align-items-center">
+										<div class="col mr-2">
+											<div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+												Invoice</div>
+											<div th:text="${totalOrders}"
+												class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+										</div>
+										<div class="col-auto">
+											<i class="fas fa-comments fa-2x text-gray-300"></i>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div style="flex: 0 0 20% !important;" class="col-xl-auto col-md-6 mb-4">
+							<div class="card border-left-info shadow h-100 py-2">
+								<div class="card-body">
+									<div class="row no-gutters align-items-center">
+										<div class="col mr-2">
+											<div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+												Total inventory
+											</div>
+											<div th:text="${totalInventory}"
+												class="h5 mb-0 font-weight-bold text-gray-800">215,000</div>
+										</div>
+										<div class="col-auto">
+											<i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+
+						<!-- Area Chart -->
+						<div class="col-xl-8 col-lg-7">
+							<div class="card shadow mb-4">
+								<!-- Card Header - Dropdown -->
+								<div
+									class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+									<h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
+									<div class="dropdown no-arrow">
+										<a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+											data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											<i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+										</a>
+										<div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+											aria-labelledby="dropdownMenuLink">
+
+										</div>
+									</div>
+								</div>
+								<!-- Card Body -->
+								<div class="card-body">
+									<div class="chart-area">
+										<canvas id="myAreaChart"></canvas>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Pie Chart -->
+						<div class="col-xl-4 col-lg-5">
+							<div class="card shadow mb-4">
+								<!-- Card Header - Dropdown -->
+								<div
+									class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+									<h6 class="m-0 font-weight-bold text-primary">Categoty Sold</h6>
+									<div class="dropdown no-arrow">
+										<a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+											data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											<i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+										</a>
+										<div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+											aria-labelledby="dropdownMenuLink">
+
+										</div>
+									</div>
+								</div>
+								<!-- Card Body -->
+								<div class="card-body">
+									<div class="chart-pie pt-4 pb-2">
+										<canvas id="myPieChart"></canvas>
+									</div>
+									<div class="mt-4 text-center small" id="chart-legend">
+										<!-- Chú thích sẽ được tạo động ở đây -->
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Content Row -->
+					<div class="row">
+
+						<!-- Content Column -->
+						<div class="col-lg-6 mb-4">
+
+							<!-- Project Card Example -->
+							<div class="card shadow mb-4">
+								<div class="card-header py-3">
+									<h6 class="m-0 font-weight-bold text-primary">Top 8 best selling products</h6>
+								</div>
+								<div class="card-body d-flex align-items-center" th:each="productMap: ${top8Products}">
+									<div class="col-md-2">
+										<img th:src="'data:image/jpeg;base64,' + ${productMap.key.image}"
+											th:style="'width:70px;'" class="img-fluid">
+									</div>
+									<div class="col-md-10">
+										<div th:style="'font-weight: 20px;'" class="font-weight-bold">
+											<span th:text="${productMap.key.name}">Server Migration</span>
+											<span th:text="${productMap.value}" class="float-right">20%</span>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<!-- Project Card Example -->
+							<div class="card shadow mb-4">
+								<div class="card-header py-3">
+									<h6 class="m-0 font-weight-bold text-primary">Top 5 most spending customers</h6>
+								</div>
+								<div class="card-body d-flex align-items-center"
+									th:each="customerMap: ${top5Customers}">
+									<div class="col-md-10">
+										<div th:style="'font-weight: 20px;'" class="font-weight-bold">
+											<span
+												th:text="${customerMap.key.firstName} + ' ' + ${customerMap.key.lastName}">Customer
+												Name</span>
+											<span th:text="'$' + ${customerMap.value}" class="float-right">Total Order
+												Price</span>
+										</div>
+									</div>
+								</div>
+
+							</div>
+
+						</div>
+
+						<div class="col-lg-6 mb-4">
+							<div class="card shadow mb-4">
+								<div class="card-header py-3">
+									<h6 class="m-0 font-weight-bold text-primary">Number of products sold by month</h6>
+								</div>
+								<div class="card-body">
+									<div class="chart-bar">
+										<canvas id="myBarChart"></canvas>
+									</div>
+								</div>
+							</div>
+
+							<!-- Approach -->
+							<div class="card shadow mb-4">
+								<div class="card-header py-3">
+									<h6 class="m-0 font-weight-bold text-primary">Number of orders made by month</h6>
+								</div>
+								<div class="card-body">
+									<div class="chart-bar2">
+										<canvas style="height: 320px !important;" id="myBarChart2"></canvas>
+									</div>
+								</div>
+							</div>
+							
+							<!-- Approach -->
+							<div class="card shadow mb-4">
+								<div class="card-header py-3">
+									<h6 class="m-0 font-weight-bold text-primary">Number of products imported by month</h6>
+								</div>
+								<div class="card-body">
+									<div class="chart-bar3">
+										<canvas style="height: 320px !important;" id="myBarChart3"></canvas>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+
+				</div>
+				<!-- /.container-fluid -->
+
+			</div>
+			<!-- End of Main Content -->
+
+			<!-- Footer -->
+			<footer th:replace="~{/fragments::footer}"></footer>
+			<!-- End of Footer -->
+
+		</div>
+		<!-- End of Content Wrapper -->
+
+	</div>
+	<!-- End of Page Wrapper -->
+	<!-- Scroll to Top Button-->
+	<a th:replace="~{/fragments::scroll}"></a>
+
+	<!-- Logout Modal-->
+	<div th:replace="~{/fragments::logoutModal}"></div>
+
+	<div th:replace="~{/fragments::script}"></div>
+
+	<!-- Page level plugins -->
+	<script th:src="@{/vendor/chart.js/Chart.min.js}"></script>
+
+	<!-- Page level custom scripts -->
+	<script th:src="@{/js/demo/chart-bar-demo.js}"></script>
+	<script th:src="@{/js/demo/chart-bar-demo2.js}"></script>
+	<script th:src="@{/js/demo/chart-bar-demo3.js}"></script>
+	<script th:src="@{/js/demo/chart-area-demo.js}"></script>
+	<script th:src="@{/js/demo/chart-pie-demo.js}"></script>
+
+</body>
+
+</html>

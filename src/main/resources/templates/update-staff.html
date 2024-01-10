@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+
+<head th:replace="~{fragments::header}">
+</head>
+
+<body id="page-top">
+
+	<!-- Page Wrapper -->
+	<div id="wrapper">
+
+		<!-- Sidebar -->
+		<ul th:replace="~{fragments::sidebar}">
+		</ul>
+		<!-- End of Sidebar -->
+
+		<!-- Content Wrapper -->
+		<div id="content-wrapper" class="d-flex flex-column">
+
+			<!-- Main Content -->
+			<div id="content">
+
+				<!-- Topbar -->
+				<nav th:replace="~{fragments::topbar}">
+				</nav>
+				<!-- End of Topbar -->
+
+				<!-- Begin Page Content -->
+				<div class="container-fluid">
+					<form class="form-horizontal" th:action="@{/admin/update-staff}" method="post" th:object="${staffDto}"
+						enctype="multipart/form-data">
+						<fieldset>
+							<!-- Form Name -->
+							<legend>UPDATE STAFF</legend>
+							<!-- Text input-->
+							<div class="form-group">
+								<label class="col-md-4 control-label" for="first-name">First Name</label>
+								<div class="col-md-4">
+									<input id="first-name" th:field="*{firstName}" name="firstName"
+										class="form-control input-md" required placeholder="Enter first name"
+										type="text">
+								</div>
+								<div class="alert alert-warning" th:if="${#fields.hasErrors('firstName')}"
+									th:errors="*{firstName}"></div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-4 control-label" for="last-name">Last Name</label>
+								<div class="col-md-4">
+									<input id="last-name" th:field="*{lastName}" name="lastName"
+										class="form-control input-md" required placeholder="Enter last name"
+										type="text">
+								</div>
+								<div class="alert alert-warning" th:if="${#fields.hasErrors('lastName')}"
+									th:errors="*{lastName}"></div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-4 control-label" for="username">Username</label>
+								<div class="col-md-4">
+									<input id="username" th:field="*{username}" name="username"
+										class="form-control input-md" required placeholder="Enter email" type="email">
+								</div>
+								<div class="alert alert-warning" th:if="${#fields.hasErrors('username')}"
+									th:errors="*{username}"></div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-4 control-label" for="phonenumber">Phone Number</label>
+								<div class="col-md-4">
+									<input class="form-control input-md" type="number" th:field="*{phoneNumber}"
+										th:placeholder="${staffDto.phoneNumber != null} ? ${staffDto.phoneNumber} : 'Enter your phone number'"
+										id="phoneNumber" name="phonenumber" maxlength="15" minlength="10">
+								</div>
+								<div class="alert alert-warning" th:if="${#fields.hasErrors('phoneNumber')}"
+									th:errors="*{phoneNumber}"></div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-4 control-label" for="country">Country</label>
+								<div class="col-md-4">
+									<select class="form-control input-md" id="country" th:field="*{country}"
+										name="country" required>
+										<option value="">-SELECT-</option>
+										<option th:each="country : ${countries}" th:value="${country.id}"
+											th:text="${country.name}">
+										</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-4 control-label" for="city">City</label>
+								<div class="col-md-4">
+									<select class="form-control input-md" id="city" th:field="*{city}" name="city"
+										required>
+										<option value="">-SELECT-</option>
+										<option th:each="city : ${cities}" th:value="${city.id}" th:text="${city.name}">
+										</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-4 control-label" for="address">Address</label>
+								<div class="col-md-4">
+									<input class="form-control input-md" type="text" th:field="*{address}"
+										th:placeholder="${staffDto.address != null} ? ${staffDto.address} : 'Enter your address'"
+										id="address" name="address">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-4 control-label" for="password">Password</label>
+								<div class="col-md-4">
+									<input class="form-control input-md" type="password" th:field="*{password}"
+										placeholder="Password" name="password" id="password">
+								</div>
+								<div class="alert alert-danger" th:if="${#fields.hasErrors('password')}"
+									th:errors="*{password}"></div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-4 control-label" for="repeatpassword">Repeat password</label>
+								<div class="col-md-4">
+									<input class="form-control input-md" type="password" th:field="*{confirmPassword}"
+										placeholder="Repeat password" name="confirmPassword" id="repeatpassword">
+								</div>
+							</div>
+							<button type="submit" class="btn btn-primary">Save</button>
+						</fieldset>
+					</form>
+		</div>
+	</div>
+	<!-- End of Main Content -->
+
+	<!-- Footer -->
+	<footer th:replace="~{fragments::footer}">
+	</footer>
+	<!-- End of Footer -->
+
+	</div>
+	<!-- End of Content Wrapper -->
+
+	</div>
+	<!-- End of Page Wrapper -->
+
+	<!-- Scroll to Top Button-->
+	<a th:replace="~{fragments::scroll}">
+	</a>
+
+
+
+	<!-- Bootstrap core JavaScript-->
+	<div th:replace="~{fragments::script}"></div>
+
+</body>

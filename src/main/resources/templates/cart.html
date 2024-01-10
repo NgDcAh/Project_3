@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+
+<head th:replace="~{/home-fragments::head}">
+</head>
+
+<body>
+	<div class="page-holder">
+		<!-- navbar-->
+		<header th:replace="~{/home-fragments::header}"></header>
+
+	</div>
+	<div class="container">
+		<!-- HERO SECTION-->
+		<section class="py-5 bg-light">
+			<div class="container">
+				<div id="custom-alert" class="custom-alert alert alert-danger" th:if="${failed}">
+					<p th:text="${failed}"></p>
+				</div>
+				<div id="custom-alert" class="custom-alert alert alert-danger" th:if="${error}">
+					<p th:text="${error}"></p>
+				</div>
+				<div class="row px-4 px-lg-5 py-lg-4 align-items-center">
+					<div class="col-lg-6">
+						<h1 class="h2 text-uppercase mb-0">Cart</h1>
+					</div>
+					<div class="col-lg-6 text-lg-end">
+						<nav aria-label="breadcrumb">
+							<ol class="breadcrumb justify-content-lg-end mb-0 px-0 bg-light">
+								<li class="breadcrumb-item"><a class="text-dark" th:href="@{/home}">Home</a></li>
+								<li class="breadcrumb-item active" aria-current="page">Cart</li>
+							</ol>
+						</nav>
+					</div>
+				</div>
+			</div>
+		</section>
+		<section class="py-5">
+			<h2 class="h5 text-uppercase mb-4">Shopping cart</h2>
+			<div class="row">
+				<div class="col-lg-8 mb-4 mb-lg-0">
+					<!-- CART TABLE-->
+					<div class="table-responsive mb-4">
+						<p class="text-center" th:if="${check}"><i class="text-info font-weight-bold text-center"></i>
+							You don't have any items in your cart</p>
+						<table th:if="${grandTotal}" class="table text-nowrap">
+							<thead class="bg-light">
+								<tr>
+									<th class="border-0 p-3" scope="col"> <strong
+											class="text-sm text-uppercase">Product</strong></th>
+									<th class="border-0 p-3" scope="col"> <strong
+											class="text-sm text-uppercase">Price</strong></th>
+									<th class="border-0 p-3" scope="col"> <strong
+											class="text-sm text-uppercase">Quantity</strong></th>
+									<th class="border-0 p-3" scope="col"> <strong
+											class="text-sm text-uppercase">Total</strong></th>
+									<th class="border-0 p-3" scope="col"> <strong
+											class="text-sm text-uppercase"></strong></th>
+								</tr>
+							</thead>
+							<tbody class="border-0">
+								<tr th:each="cartItem :  ${session.shoppingCart.cartItems}">
+									<th class="ps-0 py-3 border-light" scope="row">
+										<div class="d-flex align-items-center"><a
+												class="reset-anchor d-block animsition-link" href="detail.html"><img
+													th:src="'data:image/jepg;base64,' + ${cartItem.product.image}"
+													alt="..." width="70" /></a>
+											<div style="max-width: 200px; overflow: hidden; text-overflow: ellipsis;"
+												class="ms-3"><strong class="h6"><a th:text="${cartItem.product.name}"
+														class="reset-anchor animsition-link"
+														th:href="@{/product-detail/{id}(id = ${cartItem.product.id})}"></a></strong>
+											</div>
+										</div>
+									</th>
+									<td class="p-3 align-middle border-light">
+										<p th:text="${cartItem.unitPrice}" class="mb-0 small"></p>
+									</td>
+									<td class="p-3 align-middle border-light">
+
+										<div style="width: 200px;"
+											class="border d-flex align-items-center justify-content-between px-3">
+
+											<span
+												class="small text-uppercase text-gray headings-font-family">Quantity</span>
+											<div class="quantity">
+												<form style="display: flex;"
+													th:action="@{/customer/update-cart-product}" method="post">
+
+													<input type="hidden" name="id" th:value="${cartItem.product.id}">
+
+
+													<input style="width: 60px !important;"
+														class=" form-control form-control-sm border-0 shadow-0 p-0"
+														type="number" name="quantity" min="1" step="1"
+														th:value="${cartItem.quantity}" />
+
+													<button style="width: 39px;" type="submit" name="action"
+														class="btn btn-primary">
+														<i class="far fa-edit"></i>
+													</button>
+
+												</form>
+											</div>
+
+										</div>
+
+									</td>
+									<td class="p-3 align-middle border-light">
+										<p th:text="'$' + ${cartItem.unitPrice * cartItem.quantity}" class="mb-0 small">
+										</p>
+									</td>
+									<td class="p-3 align-middle border-light"><a class="reset-anchor"
+											th:href="@{/customer/delete-cart-product(id=${cartItem.product.id})}"><i
+												class="fas fa-trash-alt small text-muted"></i></a></td>
+								</tr>
+
+							</tbody>
+						</table>
+					</div>
+					<!-- CART NAV-->
+					<div class="bg-light px-4 py-3">
+						<div class="row align-items-center text-center">
+							<div class="col-md-6 mb-3 mb-md-0 text-md-start"><a
+									class="btn btn-link p-0 text-dark btn-sm" th:href="@{/products/0}"><i
+										class="fas fa-long-arrow-alt-left me-2"> </i>Continue shopping</a></div>
+							<div class="col-md-6 text-md-end"><a class="btn btn-outline-dark btn-sm"
+									th:href="@{/customer/check-out}">Procceed to checkout<i
+										class="fas fa-long-arrow-alt-right ms-2"></i></a></div>
+						</div>
+					</div>
+				</div>
+				<!-- ORDER TOTAL-->
+				<div th:if="${grandTotal}" class="col-lg-4">
+					<div class="card border-0 rounded-0 p-lg-4 bg-light">
+						<div class="card-body">
+							<h5 class="text-uppercase mb-4">Cart total</h5>
+							<ul class="list-unstyled mb-0">
+								<li class="d-flex align-items-center justify-content-between"><strong
+										class="text-uppercase small font-weight-bold">Subtotal</strong><span
+										th:text="'$' + ${grandTotal}" class="text-muted small"></span></li>
+								<li class="border-bottom my-2"></li>
+								<li class="d-flex align-items-center justify-content-between mb-4"><strong
+										class="text-uppercase small font-weight-bold">Total</strong><span
+										th:text="'$' + ${grandTotal}"></spa>
+								</li>
+								<li>
+									
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+	<footer th:replace="~{/home-fragments::footer}"></footer>
+	<!-- JavaScript files-->
+	<div th:replace="~{/home-fragments::script}"></div>
+	<script>
+
+		// ------------------------------------------------------- //
+		//   Inject SVG Sprite - 
+		//   see more here 
+		//   https://css-tricks.com/ajaxing-svg-sprite/
+		// ------------------------------------------------------ //
+		function injectSvgSprite(path) {
+
+			var ajax = new XMLHttpRequest();
+			ajax.open("GET", path, true);
+			ajax.send();
+			ajax.onload = function (e) {
+				var div = document.createElement("div");
+				div.className = 'd-none';
+				div.innerHTML = ajax.responseText;
+				document.body.insertBefore(div, document.body.childNodes[0]);
+			}
+		}
+		// this is set to BootstrapTemple website as you cannot 
+		// inject local SVG sprite (using only 'icons/orion-svg-sprite.svg' path)
+		// while using file:// protocol
+		// pls don't forget to change to your domain :)
+		injectSvgSprite('https://bootstraptemple.com/files/icons/orion-svg-sprite.svg');
+
+	</script>
+	<!-- FontAwesome CSS - loading as last, so it doesn't block rendering-->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
+		integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+	</div>
+</body>
+
+</html>

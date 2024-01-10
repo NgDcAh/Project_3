@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+
+<head th:insert="~{/fragments::header}">
+
+	<!-- Custom styles for this page -->
+	<link th:href="@{/vendor/datatables/dataTables.bootstrap4.min.css}" rel="stylesheet">
+</head>
+
+<body id="page-top">
+
+	<!-- Page Wrapper -->
+	<div id="wrapper">
+
+		<!-- Sidebar -->
+		<ul th:replace="~{/fragments::sidebar}">
+		</ul>
+		<!-- End of Sidebar -->
+
+		<!-- Content Wrapper -->
+		<div id="content-wrapper" class="d-flex flex-column">
+
+			<!-- Main Content -->
+			<div id="content">
+
+				<!-- Topbar -->
+				<nav th:replace="~{/fragments::topbar}"></nav>
+				<!-- End of Topbar -->
+
+				<!-- Begin Page Content -->
+				<div class="container-fluid">
+
+					<!-- Page Heading -->
+					<h1 class="h3 mb-2 text-gray-800">Product Management</h1>
+					<div th:if="${success}" class="text-center alert alert-success">
+						<p th:text="${success}"></p>
+					</div>
+					<div th:if="${error}" class="text-center alert alert-danger">
+						<p th:text="${error}"></p>
+					</div>
+					<!-- DataTales Example -->
+					<div class="card shadow mb-4">
+						<div class="card-header d-flex py-3 justify-content-between">
+							<a th:href="@{/admin/add-product}" class="btn btn-primary">Add Product</a>
+							
+							<h3 th:if="${result}" th:text="${result}" class="text-center primary"></h3>
+
+							<Button type="button" class="btn btn-primary" data-toggle="modal" data-target="#filterModal"
+								style="float: right;">Filter</Button>
+						</div>
+
+						<div class="card-body">
+							<div class="table-responsive">
+								<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+									<thead>
+										<tr>
+											<th style="width: 320px;">Name</th>
+											<th>Category</th>
+											<th>Brand</th>
+											<th>CostPrice</th>
+											<th>SalePrice</th>
+											<th>Quantity</th>
+											<th>Image</th>
+											<th>Action</th>
+
+										</tr>
+									</thead>
+									<tfoot>
+										<tr>
+											<th style="width: 320px;">Name</th>
+											<th>Category</th>
+											<th>Brand</th>
+											<th>CostPrice</th>
+											<th>SalePrice</th>
+											<th>Quantity</th>
+											<th>Image</th>
+											<th>Action</th>
+										</tr>
+									</tfoot>
+									<tbody>
+										<tr th:each="product:${products}">
+											<td th:text="${product.name}"></td>
+											<td th:text="${product.category.name}"></td>
+											<td th:text="${product.brand}"></td>
+											<td th:text="${product.costPrice}"></td>
+											<td th:text="${product.salePrice}"></td>
+											<td th:text="${product.currentQuantity}"></td>
+											<td>
+												<img><img class="my-product-image" style="height: 40px; width: 40px;"
+													alt="" th:src="'data:image/jpeg;base64,' + ${product.image}">
+											</td>
+											<td>
+												<a th:href="@{/admin/update-product/{id}(id= ${product.id})}"
+													class="btn btn-primary">Update</a>
+												<a id="importButton"
+													th:href="@{/admin/findProductById(id=${product.id})}"
+													class="btn btn-primary">Import</a>
+												<a th:if="${product.deleted} == true"
+													th:href="@{/admin/enable-product(id = ${product.id})}"
+													class="btn btn-primary">Enable</a>
+												<a th:if="${product.deleted} == false"
+													th:href="@{/admin/delete-product(id = ${product.id})}"
+													class=" btn btn-danger">Delete</a>
+
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+
+				</div>
+				<!-- /.container-fluid -->
+
+			</div>
+			<!-- End of Main Content -->
+
+			<!-- Footer -->
+			<footer th:repalce="~{/fragments::footer}"></footer>
+			<!-- End of Footer -->
+
+		</div>
+		<!-- End of Content Wrapper -->
+
+		<!--Update modal-->
+		<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+			<form th:action="@{/admin/import-product}" method="post">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="editModalLabel">Import Product</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+									aria-hidden="true">&times;</span></button>
+						</div>
+						<div class="modal-body">
+							<div class="mb-3">
+								<label for="idEdit" class="col-form-label">Id:</label>
+								<input type="text" class="form-control" id="idEdit" name="id" readonly>
+							</div>
+
+							<div class="mb-3">
+								<label for="nameEdit" class="col-form-label">Name:</label>
+								<input type="text" class="form-control" id="nameEdit" name="name" readonly>
+							</div>
+
+							<div class="mb-3">
+								<label for="quantity" class="col-form-label">Quantity:</label>
+								<input type="text" class="form-control" id="quantity" name="quantity">
+							</div>
+
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+							<button type="submit" class="btn btn-primary">Import</button>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+		<!--End update modal-->
+
+		<!-- Filter Modal -->
+		<div class="modal fade" id="filterModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+			aria-hidden="true">
+			<form th:action="@{/admin/filtered-products}" method="get">
+				<div class="modal-dialog modal-dialog-centered" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLongTitle">Filter</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<div class="mb-3">
+								<label for="category" class="col-form-label">Category:</label>
+								<select id="category" name="category" class="form-control">
+									<option th:value="null">-SELECT-</option>
+									<option th:each="category : ${categories}" th:value="${category.name}"
+										th:text="${category.name}">
+									</option>
+								</select>
+							</div>
+							<div class="mb-3">
+								<label for="brand" class="col-form-label">Brand:</label>
+								<input type="text" class="form-control" id="brand" name="brand">
+							</div>
+							<div class="mb-3">
+								<div class="form-row">
+									<div class="col-md-6 mb-3">
+										<label for="minCostPrice" class="col-form-label">Min Cost Price:</label>
+										<input type="number" class="form-control" id="minCostPrice" name="minCostPrice">
+									</div>
+									<div class="col-md-6 mb-3">
+										<label for="maxCostPrice" class="col-form-label">Max Cost Price:</label>
+										<input type="number" class="form-control" id="maxCostPrice" name="maxCostPrice">
+									</div>
+								</div>
+							</div>
+							<div class="mb-3">
+								<div class="form-row">
+									<div class="col-md-6 mb-3">
+										<label for="minSalePrice" class="col-form-label">Min Sale Price:</label>
+										<input type="number" class="form-control" id="minSalePrice" name="minSalePrice">
+									</div>
+									<div class="col-md-6 mb-3">
+										<label for="maxSalePrice" class="col-form-label">Max Sale Price:</label>
+										<input type="number" class="form-control" id="maxSalePrice" name="maxSalePrice">
+									</div>
+								</div>
+							</div>
+							<div class="mb-3">
+								<div class="form-row">
+									<div class="col-md-6 mb-3">
+										<label for="minQuantity" class="col-form-label">Min Quantity:</label>
+										<input type="number" class="form-control" id="minQuantity" name="minQuantity">
+									</div>
+									<div class="col-md-6 mb-3">
+										<label for="maxQuantity" class="col-form-label">Max Quantity:</label>
+										<input type="number" class="form-control" id="maxQuantity" name="maxQuantity">
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+							<button type="submit" class="btn btn-primary">OK</button>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+		<!-- end filter modal  -->
+
+	</div>
+	<!-- End of Page Wrapper -->
+
+	<!-- Scroll to Top Button-->
+	<a th:replace="~{/fragments::scroll}"></a>
+
+	<!-- Logout Modal-->
+	<div th:replace="~{/fragments::logoutModal}"></div>
+
+
+	<div th:replace="~{/fragments::script}"></div>
+
+	<!-- Page level plugins -->
+	<script th:src="@{/vendor/datatables/jquery.dataTables.min.js}"></script>
+	<script th:src="@{/vendor/datatables/dataTables.bootstrap4.min.js}"></script>
+
+	<!-- Page level custom scripts -->
+	<script th:src="@{/js/demo/datatables-demo.js}"></script>
+	<script th:src="@{/js/product.js}"></script>
+
+</body>
+
+</html>

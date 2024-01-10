@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+
+<head th:fragment="head">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Boutique | Ecommerce bootstrap template</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1" type="text/css">
+	<meta name="robots" content="all,follow">
+	<!-- gLightbox gallery-->
+	<link rel="stylesheet" th:href="@{/vendor/glightbox/css/glightbox.min.css}" type="text/css">
+	<!-- Range slider-->
+	<link rel="stylesheet" th:href="@{/vendor/nouislider/nouislider.min.css}" type="text/css">
+	<!-- Choices CSS-->
+	<link rel="stylesheet" th:href="@{/vendor/choices.js/public/assets/styles/choices.min.css}" type="text/css">
+	<!-- Swiper slider-->
+	<link rel="stylesheet" th:href="@{/vendor/swiper/swiper-bundle.min.css}" type="text/css">
+	<!-- Google fonts-->
+	<link rel="stylesheet"
+		href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@300;400;700&amp;display=swap">
+	<link rel="stylesheet"
+		href="https://fonts.googleapis.com/css2?family=Martel+Sans:wght@300;400;800&amp;display=swap">
+	<!-- theme stylesheet-->
+	<link rel="stylesheet" th:href="@{/css/style.default.css}" id="theme-stylesheet" type="text/css">
+	<!-- Custom stylesheet - for your changes-->
+	<link rel="stylesheet" th:href="@{/css/custom.css}" type="text/css">
+	<!-- Favicon-->
+	<link rel="shortcut icon" th:href="@{/img/favicon.png}">
+</head>
+
+<body>
+	<header th:fragment="header" class="header bg-white">
+		<div class="container px-lg-3">
+			<nav class="navbar navbar-expand-lg navbar-light py-3 px-lg-0"><a class="navbar-brand"
+					th:href="@{/home}"><span class="fw-bold text-uppercase text-dark">Boutique</span></a>
+				<button class="navbar-toggler navbar-toggler-end" type="button" data-bs-toggle="collapse"
+					data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+					aria-expanded="false" aria-label="Toggle navigation"><span
+						class="navbar-toggler-icon"></span></button>
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<ul class="navbar-nav me-auto">
+						<li class="nav-item">
+							<!-- Link--><a class="nav-link active" th:href="@{/home}">Home</a>
+						</li>
+						<li class="nav-item">
+							<!-- Link--><a class="nav-link" th:href="@{/products/0}">Shop</a>
+						</li>
+						<li class="nav-item">
+							<!-- Link--><a class="nav-link" >Contact</a>
+						</li>
+
+					</ul>
+					<ul class="navbar-nav ms-auto">
+						<li class="nav-item"><a class="nav-link" th:href="@{/customer/cart}"> <i
+									class="fas fa-dolly-flatbed me-1 text-gray"></i>Cart <span
+									th:text=" ${session.totalItems == null} ? '('+'0'+')' : '(' + ${session.totalItems} + ')'"></span></a>
+						</li>
+
+						<li class="nav-item"><a class="nav-link" th:href="@{/customer/orders}"><i class="far fa-list-alt"></i>
+							</a>
+						</li>
+
+						<li th:if="${session.username == null}" class="nav-item"><a class="nav-link"
+								th:href="@{/login}"> <i class="fas fa-user me-1 text-gray fw-normal"></i>Login</a></li>
+						<li th:unless="${session.username == null}" class="nav-item">
+							<a class="nav-link" th:text="${session.username}" th:href="@{/customer/profile}">
+								<i class="fas fa-user me-1 text-gray fw-normal"></i>
+								Login</a>
+						</li>
+						<li th:unless="${session.username == null}" class="nav-item">
+							<a class="nav-link" th:href="@{/logout}">
+								<i class="fas fa-sign-out-alt "></i>
+							</a>
+						</li>
+
+					</ul>
+				</div>
+			</nav>
+		</div>
+	</header>
+
+	<!-- Footer -->
+	<footer th:fragment="footer" class="bg-dark text-white">
+		<div class="container py-4">
+			<div class="row py-5">
+				<div class="col-md-4 mb-3 mb-md-0">
+					<h6 class="text-uppercase mb-3">Customer services</h6>
+					<ul class="list-unstyled mb-0">
+						<li><a class="footer-link" th:href="@{/home}">Help &amp; Contact Us</a></li>
+						<li><a class="footer-link" th:href="@{/home}">Returns &amp; Refunds</a></li>
+						<li><a class="footer-link" th:href="@{/home}">Online Stores</a></li>
+						<li><a class="footer-link" th:href="@{/home}">Terms &amp; Conditions</a></li>
+					</ul>
+				</div>
+				<div class="col-md-4 mb-3 mb-md-0">
+					<h6 class="text-uppercase mb-3">Company</h6>
+					<ul class="list-unstyled mb-0">
+						<li><a class="footer-link" th:href="@{/home}">What We Do</a></li>
+						<li><a class="footer-link" th:href="@{/home}">Available Services</a></li>
+						<li><a class="footer-link" th:href="@{/home}">Latest Posts</a></li>
+						<li><a class="footer-link" th:href="@{/home}">FAQs</a></li>
+					</ul>
+				</div>
+				<div class="col-md-4">
+					<h6 class="text-uppercase mb-3">Social media</h6>
+					<ul class="list-unstyled mb-0">
+						<li><a class="footer-link" th:href="@{/home}">Twitter</a></li>
+						<li><a class="footer-link" th:href="@{/home}">Instagram</a></li>
+						<li><a class="footer-link" th:href="@{/home}">Tumblr</a></li>
+						<li><a class="footer-link" th:href="@{/home}">Pinterest</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="border-top pt-4" style="border-color: #1d1d1d !important">
+				<div class="row">
+					<div class="col-md-6 text-center text-md-start">
+						
+					</div>
+					<div class="col-md-6 text-center text-md-end">
+						
+						<!-- If you want to remove the backlink, please purchase the Attribution-Free License. See details in readme.txt or license.txt. Thanks!-->
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+	<div th:fragment="script">
+		<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+		<script th:src="@{/vendor/glightbox/js/glightbox.min.js}"></script>
+		<script th:src="@{/vendor/nouislider/nouislider.min.js}"></script>
+		<script th:src="@{/vendor/swiper/swiper-bundle.min.js}"></script>
+		<script th:src="@{/vendor/choices.js/public/assets/scripts/choices.min.js}"></script>
+		<script th:src="@{/js/front.js}"></script>
+	</div>
+</body>

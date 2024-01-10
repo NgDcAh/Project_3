@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+
+<head th:insert="~{/fragments::header}">
+
+	<!-- Custom styles for this page -->
+	<link th:href="@{/vendor/datatables/dataTables.bootstrap4.min.css}" rel="stylesheet">
+</head>
+
+<body id="page-top">
+
+	<!-- Page Wrapper -->
+	<div id="wrapper">
+
+		<!-- Sidebar -->
+		<ul th:replace="~{/fragments::sidebar}">
+		</ul>
+		<!-- End of Sidebar -->
+
+		<!-- Content Wrapper -->
+		<div id="content-wrapper" class="d-flex flex-column">
+
+			<!-- Main Content -->
+			<div id="content">
+
+				<!-- Topbar -->
+				<nav th:replace="~{/fragments::topbar}"></nav>
+				<!-- End of Topbar -->
+
+				<!-- Begin Page Content -->
+				<div class="container-fluid">
+
+					<!-- Page Heading -->
+					<h1 class="h3 mb-2 text-gray-800">Customer Management</h1>
+					<div th:if="${success}" class="text-center alert alert-success">
+						<p th:text="${success}"></p>
+					</div>
+					<div th:if="${error}" class="text-center alert alert-danger">
+						<p th:text="${error}"></p>
+					</div>
+					<!-- DataTales Example -->
+					<div class="card shadow mb-4">
+						<div class="card-header d-flex py-3 justify-content-between">
+							<a th:href="@{/admin/add-customer}" class="btn btn-primary">Add Customer</a>
+							<h3 th:if="${result}" th:text="${result}" class="text-center primary"></h3>
+
+							<Button type="button" class="btn btn-primary" data-toggle="modal" data-target="#filterModal"
+								style="float: right;">Filter</Button>
+						</div>
+						<div class="card-body">
+							<div class="table-responsive">
+								<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+									<thead>
+										<tr>
+											<th>Name</th>
+											<th>Username</th>
+											<th>Phone Number</th>
+											<th>Country</th>
+											<th>City</th>
+											<th>Address</th>
+											<th style="width: 180px;">Action</th>
+
+										</tr>
+									</thead>
+									<tfoot>
+										<tr>
+											<th>Name</th>
+											<th>Username</th>
+											<th>Phone Number</th>
+											<th>Country</th>
+											<th>City</th>
+											<th>Address</th>
+											<th style="width: 180px;">Action</th>
+										</tr>
+									</tfoot>
+									<tbody>
+										<tr th:each="customer:${customers}">
+											<td th:text="${customer.firstName} + ' ' + ${customer.lastName}"></td>
+											<td th:text="${customer.username}"></td>
+											<td th:text="${customer.phoneNumber}"></td>
+											<td th:text="${customer.country != null ? customer.country.name : ''}"></td>
+											<td th:text="${customer.city != null ? customer.city.name : ''}"></td>
+											<td th:text="${customer.address != null ? customer.address : ''}"></td>
+											<td>
+												<a id="editButton"
+													th:href="@{/admin/update-customer/{id}(id= ${customer.user_id})}"
+													class="btn btn-primary">Update</a>
+												<!--	<a id="removeButton"
+													th:href="@{/admin/findCustomerById(id=${customer.user_id})}"
+													type="button" class="btn btn-danger">
+													Remove</a> -->
+												<a id="detailButton"
+													th:href="@{/admin/getDetailCustomerById(id=${customer.user_id})}"
+													type="button" class="btn btn-primary">
+													Detail</a>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+
+				</div>
+				<!-- /.container-fluid -->
+
+			</div>
+			<!-- End of Main Content -->
+
+			<!-- Footer -->
+			<footer th:repalce="~{/fragments::footer}"></footer>
+			<!-- End of Footer -->
+
+		</div>
+		<!-- End of Content Wrapper -->
+
+	</div>
+	<!-- End of Page Wrapper -->
+
+	<!-- Scroll to Top Button-->
+	<a th:replace="~{/fragments::scroll}"></a>
+
+	<!-- Logout Modal-->
+	<div th:replace="~{/fragments::logoutModal}"></div>
+
+	<!-- Update Modal-->
+	<!-- Modal -->
+	<div class="modal fade" id="removeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+		aria-hidden="true">
+		<form th:object="${customer}" th:action="@{/admin/remove-customer}" method="delete">
+			<input type="hidden" id="idEdit" name="id" />
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLongTitle">Remove customer</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						Do you want remove this customer ?
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+						<button type="submit" class="btn btn-primary">Yes</button>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+	<!-- Detail -->
+	<div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+		aria-hidden="true">
+		<form>
+			<input type="hidden" id="idEdit" name="id" />
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLongTitle">Detail</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div class="col-md-6 mb-3">
+							<label for="totalPrice" class="col-form-label">Total Price ($):</label>
+							<input type="number" class="form-control" id="totalPrice" name="totalPrice" readonly>
+						</div>
+						<div class="col-md-6 mb-3">
+							<label for="totalQuantity" class="col-form-label">Total Quantity:</label>
+							<input type="number" class="form-control" id="totalQuantity" name="totalQuantity" readonly>
+						</div>
+						<div class="col-md-6 mb-3">
+							<label for="totalOrder" class="col-form-label">Total Order:</label>
+							<input type="number" class="form-control" id="totalOrder" name="totalOrder" readonly>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+	<!-- end detail -->
+	<!-- Filter Modal -->
+	<div class="modal fade" id="filterModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+		aria-hidden="true">
+		<form th:action="@{/admin/filtered-customers}" method="get">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLongTitle">Filter</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div class="mb-3">
+							<label for="city" class="col-form-label">City:</label>
+							<select id="city" name="city" class="form-control">
+								<option th:value="null">-SELECT-</option>
+								<option th:each="city : ${cities}" th:value="${city.name}" th:text="${city.name}">
+								</option>
+							</select>
+						</div>
+						<div class="mb-3">
+							<label for="country" class="col-form-label">Country:</label>
+							<select id="country" name="country" class="form-control">
+								<option th:value="null">-SELECT-</option>
+								<option th:each="country : ${countries}" th:value="${country.name}"
+									th:text="${country.name}">
+								</option>
+							</select>
+						</div>
+						<div class="mb-3">
+							<div class="form-row">
+								<div class="col-md-6 mb-3">
+									<label for="minPrice" class="col-form-label">Min Total Price:</label>
+									<input type="number" class="form-control" id="minPrice" name="minPrice">
+								</div>
+								<div class="col-md-6 mb-3">
+									<label for="maxPrice" class="col-form-label">Max Total Price:</label>
+									<input type="number" class="form-control" id="maxPrice" name="maxPrice">
+								</div>
+							</div>
+						</div>
+						<div class="mb-3">
+							<div class="form-row">
+								<div class="col-md-6 mb-3">
+									<label for="minQuantity" class="col-form-label">Min Quantity:</label>
+									<input type="number" class="form-control" id="minQuantity" name="minQuantity">
+								</div>
+								<div class="col-md-6 mb-3">
+									<label for="maxQuantity" class="col-form-label">Max Quantity:</label>
+									<input type="number" class="form-control" id="maxQuantity" name="maxQuantity">
+								</div>
+							</div>
+						</div>
+
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						<button type="submit" class="btn btn-primary">OK</button>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+	<!-- end filter modal  -->
+
+
+	<div th:replace="~{/fragments::script}"></div>
+
+	<!-- Page level plugins -->
+	<script th:src="@{/vendor/datatables/jquery.dataTables.min.js}"></script>
+	<script th:src="@{/vendor/datatables/dataTables.bootstrap4.min.js}"></script>
+
+	<!-- Page level custom scripts -->
+	<script th:src="@{/js/demo/datatables-demo.js}"></script>
+	<script th:src="@{/js/list-customer.js}"></script>
+
+</body>
+
+</html>
