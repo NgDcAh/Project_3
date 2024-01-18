@@ -31,7 +31,7 @@
 				<div class="container-fluid">
 
 					<!-- Page Heading -->
-					<h1 class="h3 mb-2 text-gray-800">Category Management</h1>
+					<h1 class="h3 mb-2 text-gray-800">Quản lý danh mục</h1>
 					<div th:if="${success}" class="text-center alert alert-success">
 						<p th:text="${success}"></p>
 					</div>
@@ -42,24 +42,24 @@
 					<div class="card shadow mb-4">
 						<div class="card-header py-3">
 							<button type="button" class="btn btn-primary" data-toggle="modal"
-								data-target="#exampleModal" data-whatever="@mdo">Add new category</button>
+								data-target="#exampleModal" data-whatever="@mdo">Thêm mới</button>
 						</div>
 						<div class="card-body">
 							<div class="table-responsive">
 								<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 									<thead>
 										<tr>
-											<th>Category Index</th>
-											<th>Category Name</th>
-											<th>Action</th>
+											<th>Mã số</th>
+											<th>Tên</th>
+											<th>Thao tác</th>
 
 										</tr>
 									</thead>
 									<tfoot>
 										<tr>
-											<th>Category Index</th>
-											<th>Category Name</th>
-											<th>Action</th>
+											<th>Mã số</th>
+											<th>Tên</th>
+											<th>Thao tác</th>
 										</tr>
 									</tfoot>
 									<tbody>
@@ -68,13 +68,13 @@
 											<td th:text="${category.name}"></td>
 											<td>
 												<a id="editButton" class="btn btn-primary"
-													th:href="@{/admin/findById(id=${category.id})}">Update</a>
+													th:href="@{/admin/findById(id=${category.id})}">Cập nhật</a>
 												<a th:if="${category.deleted} == true"
 													th:href="@{/admin/enable-category(id = ${category.id})}"
-													class="btn btn-primary">Enable</a>
+													class="btn btn-primary">Cho phép</a>
 												<a th:if="${category.deleted} == false"
 													th:href="@{/admin/delete-category(id = ${category.id})}"
-													class=" btn btn-danger">Delete</a>
+													class=" btn btn-danger">Xóa</a>
 											</td>
 										</tr>
 									</tbody>
@@ -111,19 +111,19 @@
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel">New Category</h5>
+						<h5 class="modal-title" id="exampleModalLabel">Danh mục mới</h5>
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 					</div>
 					<div class="modal-body">
 						<div class="mb-3">
-							<label for="recipient-name" class="col-form-label">Name:</label>
+							<label for="recipient-name" class="col-form-label">Tên:</label>
 							<input type="text" class="form-control" th:field="*{name}" id="recipient-name">
 						</div>
 
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-						<button type="submit" class="btn btn-primary">Save</button>
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+						<button type="submit" class="btn btn-primary">Lưu</button>
 					</div>
 				</div>
 			</div>
@@ -137,24 +137,24 @@
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title" id="editModalLabel">Category</h5>
+						<h5 class="modal-title" id="editModalLabel">Danh mục</h5>
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 					</div>
 					<div class="modal-body">
 						<div class="mb-3">
-							<label for="idEdit" class="col-form-label">Id:</label>
+							<label for="idEdit" class="col-form-label">Mã số:</label>
 							<input type="text" class="form-control" id="idEdit" name="id" readonly>
 						</div>
 
 						<div class="mb-3">
-							<label for="nameEdit" class="col-form-label">Name:</label>
+							<label for="nameEdit" class="col-form-label">Tên:</label>
 							<input type="text" class="form-control" id="nameEdit" name="name">
 						</div>
 
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-						<button type="submit" class="btn btn-primary">Save</button>
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+						<button type="submit" class="btn btn-primary">Lưu</button>
 					</div>
 				</div>
 			</div>

@@ -31,7 +31,7 @@
 				<div class="container-fluid">
 
 					<!-- Page Heading -->
-					<h1 class="h3 mb-2 text-gray-800">Product Management</h1>
+					<h1 class="h3 mb-2 text-gray-800">Danh sách sản phẩm</h1>
 					<div th:if="${success}" class="text-center alert alert-success">
 						<p th:text="${success}"></p>
 					</div>
@@ -41,30 +41,34 @@
 					<!-- DataTales Example -->
 					<div class="card shadow mb-4">
 						<div class="card-header py-3">
-							<a th:href="@{/admin/add-product}" class="btn btn-primary">Add Product</a>
+							<a th:href="@{/admin/add-product}" class="btn btn-primary">Thêm mới</a>
 						</div>
 						<div class="card-body">
 							<div class="table-responsive">
 								<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 									<thead>
 										<tr>
-											<th>Name</th>
-											<th>Category</th>
-											<th>Price</th>
-											<th>Quantity</th>
-											<th>Image</th>
-											<th>Action</th>
+											<th style="width: 320px;">Tên</th>
+											<th>Danh mục</th>
+											<th>Thương hiệu</th>
+											<th>Giá nhập</th>
+											<th>Giá bán</th>
+											<th>Số lượng</th>
+											<th>Ảnh</th>
+											<th>Thao tác</th>
 
 										</tr>
 									</thead>
 									<tfoot>
 										<tr>
-											<th>Name</th>
-											<th>Category</th>
-											<th>Price</th>
-											<th>Quantity</th>
-											<th>Image</th>
-											<th>Action</th>
+											<th style="width: 320px;">Tên</th>
+											<th>Danh mục</th>
+											<th>Thương hiệu</th>
+											<th>Giá nhập</th>
+											<th>Giá bán</th>
+											<th>Số lượng</th>
+											<th>Ảnh</th>
+											<th>Thao tác</th>
 										</tr>
 									</tfoot>
 									<tbody>
@@ -72,6 +76,7 @@
 											<td th:text="${product.name}"></td>
 											<td th:text="${product.category.name}"></td>
 											<td th:text="${product.costPrice}"></td>
+											<td th:text="${product.salePrice}"></td>
 											<td th:text="${product.currentQuantity}"></td>
 											<td>
 												<img><img class="my-product-image" style="height: 40px; width: 40px;"

@@ -22,13 +22,13 @@
 							<div class="col-lg-6">
 								<div class="p-5">
 									<div class="text-center">
-										<h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+										<h1 class="h4 text-gray-900 mb-4">Chào mừng trở lại!</h1>
 									</div>
 									<div th:if="${param.error}" class="alert alert-danger text-center">
-										Invalid username or password
+										Tài khoản hoặc mật khẩu không chính xác!
 									</div>
 									<div th:if="${param.logout}" class="alert alert-success text-center">
-										You have been logged out!
+										Bạn đã đăng xuất!
 									</div>
 									<form class="user" th:action="@{/do-login}" method="post">
 										<div class="form-group">
@@ -41,7 +41,7 @@
 												class="form-control form-control-user" placeholder="Password">
 										</div>
 										<button type="submit" class="btn btn-primary btn-user btn-block">
-											Login
+											Đăng nhập
 										</button>
 										<hr>
 									</form>
@@ -50,8 +50,7 @@
 										
 									</div>
 									<div class="text-center">
-										<a class="small" th:href="@{/register}" href="register.html">Create an
-											Account!</a>
+										<a class="small" th:href="@{/register}" href="register.html">Tạo tài khoản!</a>
 									</div>
 								</div>
 							</div>

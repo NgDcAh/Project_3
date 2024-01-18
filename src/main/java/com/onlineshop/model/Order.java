@@ -37,7 +37,10 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "order_id")
     private Long id;
+	@Column(name = "order_date")
     private Date orderDate;
+	@Column(name = "order_complete")
+    private Date orderComplete;
     private Date deliveryDate;
     private String orderStatus;
     private double totalPrice;

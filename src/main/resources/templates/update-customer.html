@@ -31,10 +31,10 @@
 						enctype="multipart/form-data">
 						<fieldset>
 							<!-- Form Name -->
-							<legend>UPDATE CUSTOMER</legend>
+							<legend>Cập nhật thông tin khách hàng</legend>
 							<!-- Text input-->
 							<div class="form-group">
-								<label class="col-md-4 control-label" for="first-name">First Name</label>
+								<label class="col-md-4 control-label" for="first-name">Họ và tên đệm</label>
 								<div class="col-md-4">
 									<input id="first-name" th:field="*{firstName}" name="firstName"
 										class="form-control input-md" required placeholder="Enter first name"
@@ -44,7 +44,7 @@
 									th:errors="*{firstName}"></div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-4 control-label" for="last-name">Last Name</label>
+								<label class="col-md-4 control-label" for="last-name">Tên</label>
 								<div class="col-md-4">
 									<input id="last-name" th:field="*{lastName}" name="lastName"
 										class="form-control input-md" required placeholder="Enter last name"
@@ -54,7 +54,7 @@
 									th:errors="*{lastName}"></div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-4 control-label" for="username">Username</label>
+								<label class="col-md-4 control-label" for="username">Email</label>
 								<div class="col-md-4">
 									<input id="username" th:field="*{username}" name="username"
 										class="form-control input-md" required placeholder="Enter email" type="email" readonly>
@@ -63,7 +63,7 @@
 									th:errors="*{username}"></div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-4 control-label" for="phonenumber">Phone Number</label>
+								<label class="col-md-4 control-label" for="phonenumber">Số điện thoại</label>
 								<div class="col-md-4">
 									<input class="form-control input-md" type="number" th:field="*{phoneNumber}"
 										th:placeholder="${customerDto.phoneNumber != null} ? ${customerDto.phoneNumber} : 'Enter your phone number'"
@@ -73,7 +73,7 @@
 									th:errors="*{phoneNumber}"></div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-4 control-label" for="country">Country</label>
+								<label class="col-md-4 control-label" for="country">Quốc gia</label>
 								<div class="col-md-4">
 									<select class="form-control input-md" id="country" th:field="*{country}"
 										name="country" required>
@@ -85,7 +85,7 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-4 control-label" for="city">City</label>
+								<label class="col-md-4 control-label" for="city">Thành phố</label>
 								<div class="col-md-4">
 									<select class="form-control input-md" id="city" th:field="*{city}" name="city"
 										required>
@@ -96,14 +96,14 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-4 control-label" for="address">Address</label>
+								<label class="col-md-4 control-label" for="address">Địa chỉ</label>
 								<div class="col-md-4">
 									<input class="form-control input-md" type="text" th:field="*{address}"
 										th:placeholder="${customerDto.address != null} ? ${customerDto.address} : 'Enter your address'"
 										id="address" name="address">
 								</div>
 							</div>
-							<button type="submit" class="btn btn-primary">Save</button>
+							<button type="submit" class="btn btn-primary">Lưu</button>
 						</fieldset>
 					</form>
 		</div>

@@ -66,7 +66,7 @@ public class ProductController {
 		List<CategoryDto> categories = categoryServiceImpl.getCategoriesAndSize();
 		model.addAttribute("products", products);
 		model.addAttribute("categories", categories);
-		model.addAttribute("result", "Result:");
+		model.addAttribute("result", "Kết quả:");
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
             return "redirect:/login";
@@ -92,8 +92,8 @@ public class ProductController {
     
     @GetMapping("/products/in-range/{pageNo}")
     public String getProductInRange(@PathVariable("pageNo") int pageNo, Model model, 
-    		@RequestParam(name = "minSalePrice", required = false) Double minSalePrice,
-            @RequestParam(name = "maxSalePrice", required = false) Double maxSalePrice) {
+    		@RequestParam(name = "minSalePrice", required = false, defaultValue ="0.0") Double minSalePrice,
+            @RequestParam(name = "maxSalePrice", required = false,defaultValue = "9999999.0") Double maxSalePrice) {
     	Page<ProductDto> products = productServiceImpl.getProductsInRangePage(pageNo, minSalePrice, maxSalePrice);
         List<CategoryDto> categories = categoryServiceImpl.getCategoriesAndSize();
         model.addAttribute("title", "Manage Products");
@@ -185,10 +185,10 @@ public class ProductController {
                               RedirectAttributes redirectAttributes) {
         try {
             productServiceImpl.save(imageProduct, product);
-            redirectAttributes.addFlashAttribute("success", "Add new product successfully!");
+            redirectAttributes.addFlashAttribute("success", "Thêm mới thành công!");
         } catch (Exception e) {
             e.printStackTrace();
-            redirectAttributes.addFlashAttribute("error", "Failed to add new product!");
+            redirectAttributes.addFlashAttribute("error", "Lỗi!");
         }
         return "redirect:/admin/products";
     }
@@ -203,7 +203,7 @@ public class ProductController {
     public String importProduct(@RequestParam("quantity") int quantity,ProductDto productDto, RedirectAttributes redirectAttributes) {
     	try {
 			productServiceImpl.importProduct(productDto, quantity);
-			redirectAttributes.addFlashAttribute("success", "import successfully");
+			redirectAttributes.addFlashAttribute("success", "Nhập thành công");
 		} catch (Exception e) {
 			e.printStackTrace();
 			redirectAttributes.addFlashAttribute("error", "Failed to import");
@@ -232,7 +232,7 @@ public class ProductController {
         try {
 
             productServiceImpl.update(imageProduct, productDto);
-            redirectAttributes.addFlashAttribute("success", "Update successfully!");
+            redirectAttributes.addFlashAttribute("success", "Cập nhật thành công!");
         } catch (Exception e) {
             e.printStackTrace();
             redirectAttributes.addFlashAttribute("error", "Error server, please try again!");
@@ -244,7 +244,7 @@ public class ProductController {
     public String enabledProduct(Long id, RedirectAttributes redirectAttributes) {
         try {
             productServiceImpl.enableById(id);
-            redirectAttributes.addFlashAttribute("success", "Enabled successfully!");
+            redirectAttributes.addFlashAttribute("success", "Kích hoạt thành công!");
         } catch (Exception e) {
             e.printStackTrace();
             redirectAttributes.addFlashAttribute("error", "Enabled failed!");
@@ -256,7 +256,7 @@ public class ProductController {
     public String deletedProduct(Long id, RedirectAttributes redirectAttributes) {
         try {
             productServiceImpl.deleteById(id);
-            redirectAttributes.addFlashAttribute("success", "Deleted successfully!");
+            redirectAttributes.addFlashAttribute("success", "Xóa thành công!");
         } catch (Exception e) {
             e.printStackTrace();
             redirectAttributes.addFlashAttribute("error", "Deleted failed!");

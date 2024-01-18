@@ -4,7 +4,7 @@
 <head th:fragment="head">
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Boutique | Ecommerce bootstrap template</title>
+	<title>Boutique</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1" type="text/css">
 	<meta name="robots" content="all,follow">
@@ -41,19 +41,19 @@
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
 					<ul class="navbar-nav me-auto">
 						<li class="nav-item">
-							<!-- Link--><a class="nav-link active" th:href="@{/home}">Home</a>
+							<!-- Link--><a class="nav-link active" th:href="@{/home}">Trang chủ</a>
 						</li>
 						<li class="nav-item">
-							<!-- Link--><a class="nav-link" th:href="@{/products/0}">Shop</a>
+							<!-- Link--><a class="nav-link" th:href="@{/products/0}">Cửa hàng</a>
 						</li>
 						<li class="nav-item">
-							<!-- Link--><a class="nav-link" >Contact</a>
+							<!-- Link--><a class="nav-link" >Cộng tác</a>
 						</li>
 
 					</ul>
 					<ul class="navbar-nav ms-auto">
 						<li class="nav-item"><a class="nav-link" th:href="@{/customer/cart}"> <i
-									class="fas fa-dolly-flatbed me-1 text-gray"></i>Cart <span
+									class="fas fa-dolly-flatbed me-1 text-gray"></i>Giỏ hàng<span
 									th:text=" ${session.totalItems == null} ? '('+'0'+')' : '(' + ${session.totalItems} + ')'"></span></a>
 						</li>
 
@@ -62,11 +62,11 @@
 						</li>
 
 						<li th:if="${session.username == null}" class="nav-item"><a class="nav-link"
-								th:href="@{/login}"> <i class="fas fa-user me-1 text-gray fw-normal"></i>Login</a></li>
+								th:href="@{/login}"> <i class="fas fa-user me-1 text-gray fw-normal"></i>Đăng nhập</a></li>
 						<li th:unless="${session.username == null}" class="nav-item">
 							<a class="nav-link" th:text="${session.username}" th:href="@{/customer/profile}">
 								<i class="fas fa-user me-1 text-gray fw-normal"></i>
-								Login</a>
+								Đăng nhập</a>
 						</li>
 						<li th:unless="${session.username == null}" class="nav-item">
 							<a class="nav-link" th:href="@{/logout}">
@@ -85,7 +85,7 @@
 		<div class="container py-4">
 			<div class="row py-5">
 				<div class="col-md-4 mb-3 mb-md-0">
-					<h6 class="text-uppercase mb-3">Customer services</h6>
+					<h6 class="text-uppercase mb-3">Dịch vụ khách hàng</h6>
 					<ul class="list-unstyled mb-0">
 						<li><a class="footer-link" th:href="@{/home}">Help &amp; Contact Us</a></li>
 						<li><a class="footer-link" th:href="@{/home}">Returns &amp; Refunds</a></li>

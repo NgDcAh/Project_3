@@ -81,18 +81,18 @@ public class StaffController {
 			if (staff != null) {
 				model.addAttribute("staffDto", staffDto);
 				System.out.println("staff not null");
-				model.addAttribute("usernameError", "Username has been already!");
+				model.addAttribute("usernameError", "Email đã tồn tại!");
 				return "add-staff";
 			}
 			if (staffDto.getPassword().equals(staffDto.getConfirmPassword())) {
 				staffDto.setPassword(passwordEncoder.encode(staffDto.getPassword()));
 				userServiceImpl.saveStaff(staffDto);
 				System.out.println("success");
-				model.addAttribute("success", "Successfully!");
+				model.addAttribute("success", "Thêm mới thành công!");
 				model.addAttribute("staffDto", staffDto);
 			} else {
 				model.addAttribute("staffDto", staffDto);
-				model.addAttribute("passwordError", "Your password maybe wrong! Check again!");
+				model.addAttribute("passwordError", "Sai mật khẩu!");
 				System.out.println("password not same");
 				return "add-staff";
 			}
@@ -120,7 +120,7 @@ public class StaffController {
 			RedirectAttributes redirectAttributes) {
 		try {
 			userServiceImpl.update(staffDto);
-			redirectAttributes.addFlashAttribute("success", "Update successfully!");
+			redirectAttributes.addFlashAttribute("success", "Cập nhật thành công!");
 		} catch (Exception e) {
 			e.printStackTrace();
 			redirectAttributes.addFlashAttribute("error", "Error server, please try again!");
@@ -132,7 +132,7 @@ public class StaffController {
 	public String removeStaffString (Long id, RedirectAttributes redirectAttributes) {
 		try {
 			userServiceImpl.remove(id);
-			redirectAttributes.addFlashAttribute("success", "Deleted successfully!");
+			redirectAttributes.addFlashAttribute("success", "Xóa thành công!");
 		}
 		catch (Exception e) {
 			e.printStackTrace();

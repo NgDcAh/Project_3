@@ -83,7 +83,7 @@ public class CartController {
 				if (shoppingCartDto == null) {
 				    shoppingCartDto = new ShoppingCartDto(); 
 				}
-				redirectAttributes.addFlashAttribute("failed", "This product is not enough");
+				redirectAttributes.addFlashAttribute("failed", "Sản phẩm này không đủ số lượng");
 				session.setAttribute("totalItems", shoppingCartDto.getTotalItems());
 				session.setAttribute("shoppingCart", shoppingCartDto);
 			}
@@ -107,7 +107,7 @@ public class CartController {
 				return "redirect:" + request.getHeader("Referer");
 			}
 			else {
-				redirectAttributes.addFlashAttribute("failed", "This product is not enough");
+				redirectAttributes.addFlashAttribute("failed", "Sản phẩm này không đủ số lượng");
 				session.setAttribute("totalItems", shoppingCartDto.getTotalItems());
 				session.setAttribute("shoppingCart", shoppingCartDto);
 			}

@@ -31,10 +31,10 @@
 						method="post" th:object="${productDto}" enctype="multipart/form-data">
 						<fieldset>
 							<!-- Form Name -->
-							<legend>UPDATE PRODUCT</legend>
+							<legend>Cập nhật thông tin sản phẩm</legend>
 							<!-- Text input-->
 							<div class="form-group">
-								<label class="col-md-4 control-label" for="product_name">PRODUCT NAME</label>
+								<label class="col-md-4 control-label" for="product_name">Tên</label>
 								<div class="col-md-4">
 									<input id="product_name" th:field="*{name}" name="product_name"
 										class="form-control input-md" required="" type="text">
@@ -43,7 +43,7 @@
 
 							<!-- Select Basic -->
 							<div class="form-group">
-								<label class="col-md-4 control-label" for="product_categories">PRODUCT CATEGORY</label>
+								<label class="col-md-4 control-label" for="product_categories">Danh mục</label>
 								<div class="col-md-4">
 									<select id="product_categories" th:field="*{category}" name="product_categories"
 										class="form-control">
@@ -57,7 +57,7 @@
 
 							<!-- Text input-->
 							<div class="form-group">
-								<label class="col-md-4 control-label" for="description">BRAND</label>
+								<label class="col-md-4 control-label" for="description">Thương hiệu</label>
 								<div class="col-md-4">
 									<input id="description" th:field="*{brand}" name="brand"
 										class="form-control input-md" required="" type="text">
@@ -65,7 +65,7 @@
 							</div>
 							<!-- Text input-->
 							<div class="form-group">
-								<label class="col-md-4 control-label" for="description">PRODUCT DESCRIPTION</label>
+								<label class="col-md-4 control-label" for="description">Mô tả</label>
 								<div class="col-md-4">
 									<input id="description" th:field="*{description}" name="description"
 										class="form-control input-md" required="" type="text">
@@ -74,8 +74,7 @@
 
 							<!-- Text input-->
 							<div class="form-group">
-								<label class="col-md-4 control-label" for="available_quantity">AVAILABLE
-									QUANTITY</label>
+								<label class="col-md-4 control-label" for="available_quantity">Số lượng</label>
 								<div class="col-md-4">
 									<input id="available_quantity" th:field="*{currentQuantity}"
 										name="available_quantity" class="form-control input-md" required="" type="text">
@@ -84,7 +83,7 @@
 
 							<!-- Text input-->
 							<div class="form-group">
-								<label class="col-md-4 control-label" for="price">COST PRICE</label>
+								<label class="col-md-4 control-label" for="price">Giá nhập</label>
 								<div class="col-md-4">
 									<input id="price" name="cost_price" th:field="*{costPrice}" class="form-control input-md"
 										required="" type="text">
@@ -93,7 +92,7 @@
 
 							<!-- Text input-->
 							<div class="form-group">
-								<label class="col-md-4 control-label" for="price">SALE PRICE</label>
+								<label class="col-md-4 control-label" for="price">Giá bán</label>
 								<div class="col-md-4">
 									<input id="price" name="sale_price" th:field="*{salePrice}" class="form-control input-md"
 										required="" type="text">
@@ -104,7 +103,7 @@
 								<div class="col-md-4">
 									<!-- File Button -->
 									<div class="form-group">
-										<label class="col-md-4 control-label" for="image">PRODUCT IMAGE</label>
+										<label class="col-md-4 control-label" for="image">Ảnh</label>
 										<div class="col-md-4">
 											<img class="my-product-image" style="height: 40px; width: 40px;" alt=""
 												th:src="'data:image/jpeg;base64,' + ${productDto.image}">
@@ -113,7 +112,7 @@
 									</div>
 								</div>
 							</div>
-							<button type="submit" class="btn btn-primary">Update</button>
+							<button type="submit" class="btn btn-primary">Lưu</button>
 						</fieldset>
 					</form>
 				</div>

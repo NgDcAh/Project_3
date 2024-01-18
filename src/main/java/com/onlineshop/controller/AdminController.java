@@ -82,6 +82,8 @@ public class AdminController {
         int totalOrders = orderServiceImpl.getTotalOrders();
         int totalSoldProducts = orderServiceImpl.getTotalSoldProducts();
         int totalInventory = productServiceImpl.getTotalInventory();
+        int qntOrderRequest = orderServiceImpl.getQuantityOrderRequest();
+        int qntOrderDelivery = orderServiceImpl.getQuantityOrderDelivery();
         model.addAttribute("top8Products", top8Products);
         model.addAttribute("top5Customers", top5Customers);
         model.addAttribute("investment", investment);
@@ -89,6 +91,8 @@ public class AdminController {
         model.addAttribute("totalOrders", totalOrders);
         model.addAttribute("totalSoldProducts", totalSoldProducts);
         model.addAttribute("totalInventory", totalInventory);
+        model.addAttribute("qntOrderRequest", qntOrderRequest);
+        model.addAttribute("qntOrderDelivery", qntOrderDelivery);
         return "index";
     }
 	

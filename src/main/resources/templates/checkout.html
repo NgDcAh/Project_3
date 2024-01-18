@@ -15,14 +15,14 @@
 			<div class="container">
 				<div class="row px-4 px-lg-5 py-lg-4 align-items-center">
 					<div class="col-lg-6">
-						<h1 class="h2 text-uppercase mb-0">Checkout</h1>
+						<h1 class="h2 text-uppercase mb-0">Thanh toán</h1>
 					</div>
 					<div class="col-lg-6 text-lg-end">
 						<nav aria-label="breadcrumb">
 							<ol class="breadcrumb justify-content-lg-end mb-0 px-0 bg-light">
-								<li class="breadcrumb-item"><a class="text-dark" href="index.html">Home</a></li>
-								<li class="breadcrumb-item"><a class="text-dark" href="cart.html">Cart</a></li>
-								<li class="breadcrumb-item"><a class="text-dark" href="cart.html">Checkout</a></li>
+								<li class="breadcrumb-item"><a class="text-dark" href="index.html">Trang chủ</a></li>
+								<li class="breadcrumb-item"><a class="text-dark" href="cart.html">Giỏ hàng</a></li>
+								<li class="breadcrumb-item"><a class="text-dark" href="cart.html">Thanh toán</a></li>
 							</ol>
 						</nav>
 					</div>
@@ -32,7 +32,7 @@
 		<section class="py-5">
 
 			<!-- BILLING ADDRESS-->
-			<h2 class="h5 text-uppercase mb-4">BILLING DETAILS</h2>
+			<h2 class="h5 text-uppercase mb-4">Chi tiết đơn hàng</h2>
 			<div th:if="${success}" class="text-center alert alert-success">
 				<p th:text="${success}"></p>
 			</div>
@@ -41,72 +41,88 @@
 					<form th:object="${customer}">
 						<div class="row gy-3">
 							<div class="col-lg-6">
-								<label class="form-label text-sm text-uppercase" for="firstName">First name </label>
+								<label class="form-label text-sm text-uppercase" for="firstName">Họ và tên đệm</label>
 								<input class="form-control form-control-lg" id="firstname" th:field="*{firstName}"
 									readonly>
 							</div>
 
 							<div class="col-lg-6">
-								<label class="form-label text-sm text-uppercase" for="lastName">Last name </label>
+								<label class="form-label text-sm text-uppercase" for="lastName">Tên</label>
 								<input class="form-control form-control-lg" type="text" th:field="*{lastName}"
 									id="lastname" readonly>
 							</div>
 
 							<div class="col-lg-6">
-								<label class="form-label text-sm text-uppercase" for="phone">Phone number </label>
+								<label class="form-label text-sm text-uppercase" for="phone">Số điện thoại</label>
 								<input class="form-control form-control-lg" type="number" th:field="*{phoneNumber}"
 									readonly id="phoneNumber">
 							</div>
 
 							<div class="col-lg-12">
-								<label class="form-label text-sm text-uppercase" for="address">Address</label>
+								<label class="form-label text-sm text-uppercase" for="address">Địa chỉ</label>
 								<input class="form-control form-control-lg" type="text"
 									th:value="${customer.address + ', ' + customer.city.name + ', ' + customer.country.name}"
 									id="address" placeholder="" readonly>
 							</div>
 
-							<a class="btn btn-dark" th:href="@{/customer/profile}">Change Information</a>
-							<hr class="mb-1">
-							<h2 class="h5 text-uppercase mb-4">Payment method</h2>
+							<a class="btn btn-dark" th:href="@{/customer/profile}">Thay đổi thông tin</a>
+							<!--		<hr class="mb-1">
+							<h2 class="h5 text-uppercase mb-4">Phương thức thanh toán</h2>
 							<div class="col-lg-12">
 								<div class="custom-control custom-radio">
-									<input id="debit" name="paymentMethod" type="radio" checked
+									<input id="cash" name="paymentMethod" type="radio" checked
 										class="custom-control-input" required>
-									<label class="custom-control-label" for="debit">Cash</label>
+									<label class="custom-control-label" for="cash">Trả trước</label>
+									<input style="margin-left: 10px;" id="money" name="paymentMethod" type="radio" checked
+										class="custom-control-input" required>
+									<label class="custom-control-label" for="money">Thanh toán khi nhận hàng</label>
 								</div>
 							</div>
 							<hr class="mb-1">
-
+					-->
 						</div>
 					</form>
 				</div>
 				<!-- ORDER SUMMARY-->
 				<div class="col-lg-4">
-					<form th:action="@{/customer/add-order}" method="post" th:object="${session.shoppingCart}">
+					<form id="paymentForm" th:action="@{/customer/add-order}" method="post" th:object="${session.shoppingCart}">
 						<input type="hidden" name="id" th:value="${id}">
 						<div class="card border-0 rounded-0 p-lg-4 bg-light">
 							<div class="card-body">
-								<h5 class="text-uppercase mb-4">Your order</h5>
+								<h5 class="text-uppercase mb-4">Đơn hàng của bạn</h5>
 								<ul class="list-unstyled mb-0" th:each="item : ${session.shoppingCart.cartItems}">
 									<li class="d-flex align-items-center justify-content-between"><strong
-											class="small fw-bold" th:text="${item.product.name}" style="max-width: 160px; overflow: hidden; text-overflow: ellipsis;"></strong><span
+											class="small fw-bold" th:text="${item.product.name}"
+											style="max-width: 160px; overflow: hidden; text-overflow: ellipsis;"></strong><span
 											class="text-muted small">x[(${item.quantity})]</span><span
 											class="text-muted small">[(${item.product.salePrice})]$</span></li>
 									<li class="border-bottom my-2"></li>
 								</ul>
 								<div class="d-flex align-items-center justify-content-between"><strong
-										class="text-uppercase small fw-bold">Total</strong><span
+										class="text-uppercase small fw-bold">Tổng thanh toán</strong><span
 										th:text="${session.shoppingCart.totalPrice}"></span></div>
 								<div class="border-bottom my-2"></div>
+								<div class="custom-control custom-radio">
+									<input id="cash" name="method" type="radio" checked
+										class="custom-control-input" required>
+									<label class="custom-control-label" for="cash">Trả trước</label>
+									<input style="margin-left: 10px;" id="money" name="method" type="radio"
+										checked class="custom-control-input" required>
+									<label class="custom-control-label" for="money">Thanh toán khi nhận hàng</label>
+								</div>
+								<input type="hidden" id="selectedPaymentMethod" name="paymentMethod"
+									value="cash">
+								<div class="border-bottom my-2"></div>
 								<div class="col-lg-12 form-group">
-									<button class="btn btn-dark" type="submit">Place order</button>
+									<button class="btn btn-dark" type="submit" onclick="updatePaymentMethod()">Thanh toán</button>
 								</div>
 							</div>
 						</div>
-					</form>
 				</div>
+				</form>
 			</div>
-		</section>
+	</div>
+	</section>
 	</div>
 	<footer th:replace="~{/home-fragments::footer}"></footer>
 	<!-- JavaScript files-->
@@ -134,6 +150,22 @@
 		// while using file:// protocol
 		// pls don't forget to change to your domain :)
 		injectSvgSprite('https://bootstraptemple.com/files/icons/orion-svg-sprite.svg');
+
+		function updatePaymentMethod() {
+        var cashRadio = document.getElementById("cash");
+        var moneyRadio = document.getElementById("money");
+        var selectedPaymentMethodField = document.getElementById("selectedPaymentMethod");
+
+        // Kiểm tra xem radio button nào được chọn và cập nhật giá trị trường ẩn
+        if (cashRadio.checked) {
+            selectedPaymentMethodField.value = document.querySelector('label[for="cash"]').innerText;
+        } else if (moneyRadio.checked) {
+            selectedPaymentMethodField.value = document.querySelector('label[for="money"]').innerText;
+        }
+
+        // Tiếp tục xử lý form (nếu cần)
+        document.getElementById("paymentForm").submit();
+    }
 
 	</script>
 

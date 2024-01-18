@@ -27,7 +27,7 @@
 				<div class="container-fluid">
 
 					<div class="d-sm-flex align-items-center justify-content-between mb-4">
-						<h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+						<h1 class="h3 mb-0 text-gray-800">Thống kê</h1>
 					</div>
 
 					<!-- Content Row -->
@@ -40,8 +40,8 @@
 									<div class="row no-gutters align-items-center">
 										<div class="col mr-2">
 											<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-												Investment</div>
-											<div th:text="'$' + ${investment}"
+												Tiền vốn</div>
+											<div th:text="${investment} + 'K VNĐ'"
 												class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
 										</div>
 										<div class="col-auto">
@@ -59,8 +59,8 @@
 									<div class="row no-gutters align-items-center">
 										<div class="col mr-2">
 											<div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-												Revenue</div>
-											<div th:text="'$' + ${revenue}"
+												Thu được</div>
+											<div th:text="${revenue} + 'K VNĐ'"
 												class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
 										</div>
 										<div class="col-auto">
@@ -78,9 +78,9 @@
 									<div class="row no-gutters align-items-center">
 										<div class="col mr-2">
 											<div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-												Total Sold Products
+												Số sản phẩm bán được
 											</div>
-											<div th:text="${totalSoldProducts}"
+											<div th:text="${totalSoldProducts} "
 												class="h5 mb-0 font-weight-bold text-gray-800">215,000</div>
 										</div>
 										<div class="col-auto">
@@ -98,7 +98,7 @@
 									<div class="row no-gutters align-items-center">
 										<div class="col mr-2">
 											<div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-												Invoice</div>
+												Số đơn đã hàng thực hiện</div>
 											<div th:text="${totalOrders}"
 												class="h5 mb-0 font-weight-bold text-gray-800">18</div>
 										</div>
@@ -116,9 +116,47 @@
 									<div class="row no-gutters align-items-center">
 										<div class="col mr-2">
 											<div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-												Total inventory
+												Số lượng trong kho
 											</div>
 											<div th:text="${totalInventory}"
+												class="h5 mb-0 font-weight-bold text-gray-800">215,000</div>
+										</div>
+										<div class="col-auto">
+											<i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div style="flex: 0 0 20% !important;" class="col-xl-auto col-md-6 mb-4">
+							<div class="card border-left-danger shadow h-100 py-2">
+								<div class="card-body">
+									<div class="row no-gutters align-items-center">
+										<div class="col mr-2">
+											<div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+												Số đơn hàng chờ xác nhận
+											</div>
+											<div th:text="${qntOrderRequest}"
+												class="h5 mb-0 font-weight-bold text-gray-800">215,000</div>
+										</div>
+										<div class="col-auto">
+											<i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div style="flex: 0 0 20% !important;" class="col-xl-auto col-md-6 mb-4">
+							<div class="card border-left-danger shadow h-100 py-2">
+								<div class="card-body">
+									<div class="row no-gutters align-items-center">
+										<div class="col mr-2">
+											<div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+												Số đơn hàng đang vận chuyển
+											</div>
+											<div th:text="${qntOrderDelivery}"
 												class="h5 mb-0 font-weight-bold text-gray-800">215,000</div>
 										</div>
 										<div class="col-auto">
@@ -138,7 +176,7 @@
 								<!-- Card Header - Dropdown -->
 								<div
 									class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-									<h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
+									<h6 class="m-0 font-weight-bold text-primary">Số tiền lãi theo tháng</h6>
 									<div class="dropdown no-arrow">
 										<a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
 											data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -165,7 +203,7 @@
 								<!-- Card Header - Dropdown -->
 								<div
 									class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-									<h6 class="m-0 font-weight-bold text-primary">Categoty Sold</h6>
+									<h6 class="m-0 font-weight-bold text-primary">Tỷ lệ danh mục đã bán</h6>
 									<div class="dropdown no-arrow">
 										<a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
 											data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -199,7 +237,7 @@
 							<!-- Project Card Example -->
 							<div class="card shadow mb-4">
 								<div class="card-header py-3">
-									<h6 class="m-0 font-weight-bold text-primary">Top 8 best selling products</h6>
+									<h6 class="m-0 font-weight-bold text-primary">Top 8 sản phẩm bán chạy</h6>
 								</div>
 								<div class="card-body d-flex align-items-center" th:each="productMap: ${top8Products}">
 									<div class="col-md-2">
@@ -218,7 +256,7 @@
 							<!-- Project Card Example -->
 							<div class="card shadow mb-4">
 								<div class="card-header py-3">
-									<h6 class="m-0 font-weight-bold text-primary">Top 5 most spending customers</h6>
+									<h6 class="m-0 font-weight-bold text-primary">Top 5 khách hàng chi nhiều nhất</h6>
 								</div>
 								<div class="card-body d-flex align-items-center"
 									th:each="customerMap: ${top5Customers}">
@@ -227,7 +265,7 @@
 											<span
 												th:text="${customerMap.key.firstName} + ' ' + ${customerMap.key.lastName}">Customer
 												Name</span>
-											<span th:text="'$' + ${customerMap.value}" class="float-right">Total Order
+											<span th:text="${customerMap.value} + 'K VNĐ'" class="float-right">Total Order
 												Price</span>
 										</div>
 									</div>
@@ -240,7 +278,7 @@
 						<div class="col-lg-6 mb-4">
 							<div class="card shadow mb-4">
 								<div class="card-header py-3">
-									<h6 class="m-0 font-weight-bold text-primary">Number of products sold by month</h6>
+									<h6 class="m-0 font-weight-bold text-primary">Số lượng sản phẩm bán ra theo tháng</h6>
 								</div>
 								<div class="card-body">
 									<div class="chart-bar">
@@ -252,7 +290,7 @@
 							<!-- Approach -->
 							<div class="card shadow mb-4">
 								<div class="card-header py-3">
-									<h6 class="m-0 font-weight-bold text-primary">Number of orders made by month</h6>
+									<h6 class="m-0 font-weight-bold text-primary">Số lượng đơn hàng đã thực hiện theo tháng</h6>
 								</div>
 								<div class="card-body">
 									<div class="chart-bar2">
@@ -264,7 +302,7 @@
 							<!-- Approach -->
 							<div class="card shadow mb-4">
 								<div class="card-header py-3">
-									<h6 class="m-0 font-weight-bold text-primary">Number of products imported by month</h6>
+									<h6 class="m-0 font-weight-bold text-primary">Số lượng sản phẩm nhập vào theo tháng</h6>
 								</div>
 								<div class="card-body">
 									<div class="chart-bar3">

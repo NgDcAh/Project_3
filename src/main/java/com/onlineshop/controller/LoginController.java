@@ -90,18 +90,18 @@ public class LoginController {
             if (customer != null) {
                 model.addAttribute("userDto", userDto);
                 System.out.println("customer not null");
-                model.addAttribute("emailError", "Your email has been registered!");
+                model.addAttribute("emailError", "Email đã tồn tại!");
                 return "register";
             }
             if (userDto.getPassword().equals(userDto.getConfirmPassword())) {
             	userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
                 userServiceImpl.saveCustomer(userDto);
                 System.out.println("success");
-                model.addAttribute("success", "Register successfully!");
+                model.addAttribute("success", "Đăng ký !");
                 model.addAttribute("userDto", userDto);
             } else {
                 model.addAttribute("userDto", userDto);
-                model.addAttribute("passwordError", "Your password maybe wrong! Check again!");
+                model.addAttribute("passwordError", "Sai mật khẩu!");
                 System.out.println("password not same");
                 return "register";
             }

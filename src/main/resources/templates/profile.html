@@ -15,13 +15,13 @@
 			<div class="container">
 				<div class="row px-4 px-lg-5 py-lg-4 align-items-center">
 					<div class="col-lg-6">
-						<h1 class="h2 text-uppercase mb-0">Profile</h1>
+						<h1 class="h2 text-uppercase mb-0">Hồ sơ</h1>
 					</div>
 					<div class="col-lg-6 text-lg-end">
 						<nav aria-label="breadcrumb">
 							<ol class="breadcrumb justify-content-lg-end mb-0 px-0 bg-light">
-								<li class="breadcrumb-item"><a class="text-dark" href="index.html">Home</a></li>
-								<li class="breadcrumb-item"><a class="text-dark" href="cart.html">Profile</a></li>
+								<li class="breadcrumb-item"><a class="text-dark" href="index.html">Trang chủ</a></li>
+								<li class="breadcrumb-item"><a class="text-dark" href="cart.html">Hồ sơ</a></li>
 							</ol>
 						</nav>
 					</div>
@@ -31,7 +31,7 @@
 		<section class="py-5">
 
 			<!-- BILLING ADDRESS-->
-			<h2 class="h5 text-uppercase mb-4">Customer details</h2>
+			<h2 class="h5 text-uppercase mb-4">Chi tiết</h2>
 			<div th:if="${success}" class="text-center alert alert-success">
 				<p th:text="${success}"></p>
 			</div>
@@ -40,26 +40,26 @@
 					<form th:action="@{/customer/update-profile}" method="post" th:object="${customer}">
 						<div class="row gy-3">
 							<div class="col-lg-6">
-								<label class="form-label text-sm text-uppercase" for="firstName">First name </label>
+								<label class="form-label text-sm text-uppercase" for="firstName">Họ và tên đệm</label>
 								<input class="form-control form-control-lg" id="firstname" th:field="*{firstName}"
 									name="firstname" required placeholder="Enter your first name">
 							</div>
 							<div class="alert alert-warning" th:if="${#fields.hasErrors('firstName')}"
 								th:errors="*{firstName}"></div>
 							<div class="col-lg-6">
-								<label class="form-label text-sm text-uppercase" for="lastName">Last name </label>
+								<label class="form-label text-sm text-uppercase" for="lastName">Tên</label>
 								<input class="form-control form-control-lg" type="text" th:field="*{lastName}"
 									id="lastname" name="lastname" required placeholder="Enter your last name">
 							</div>
 							<div class="alert alert-warning" th:if="${#fields.hasErrors('lastName')}"
 								th:errors="*{lastName}" required></div>
 							<div class="col-lg-6">
-								<label class="form-label text-sm text-uppercase" for="email">Email address </label>
+								<label class="form-label text-sm text-uppercase" for="email">Tài khoản (Email)</label>
 								<input class="form-control form-control-lg" type="email" th:field="*{username}"
 									id="username" name="username" readonly>
 							</div>
 							<div class="col-lg-6">
-								<label class="form-label text-sm text-uppercase" for="phone">Phone number </label>
+								<label class="form-label text-sm text-uppercase" for="phone">Số điện thoại</label>
 								<input class="form-control form-control-lg" type="number" th:field="*{phoneNumber}"
 									th:placeholder="${customer.phoneNumber != null} ? ${customer.phoneNumber} : 'Enter your phone number'"
 									id="phoneNumber" name="phonenumber" maxlength="15" minlength="10">
@@ -68,7 +68,7 @@
 								th:errors="*{phoneNumber}"></div>
 
 							<div class="col-lg-6 form-group">
-								<label class="form-label text-sm text-uppercase" for="country">Country</label>
+								<label class="form-label text-sm text-uppercase" for="country">Quốc gia</label>
 								<select class="form-control form-control-lg" id="country" th:field="*{country}"
 									name="country" required>
 									<option value="">-SELECT-</option>
@@ -78,7 +78,7 @@
 								</select>
 							</div>
 							<div class="col-lg-6 form-group">
-								<label class="form-label text-sm text-uppercase" for="city">City</label>
+								<label class="form-label text-sm text-uppercase" for="city">Thành phố</label>
 								<select class="form-control form-control-lg" id="city" th:field="*{city}" name="city"
 									required>
 									<option value="">-SELECT-</option>
@@ -87,21 +87,21 @@
 								</select>
 							</div>
 							<div class="col-lg-12">
-								<label class="form-label text-sm text-uppercase" for="address">Address</label>
+								<label class="form-label text-sm text-uppercase" for="address">Địa chỉ</label>
 								<input class="form-control form-control-lg" type="text" th:field="*{address}"
 									th:placeholder="${customer.address != null} ? ${customer.address} : 'Enter your address'"
 									id="address" name="address">
 							</div>
 
 							<div class="col-lg-12 form-group">
-								<button class="btn btn-dark" type="submit">Save</button>
+								<button class="btn btn-dark" type="submit">Lưu</button>
 							</div>
 						</div>
 					</form>
 					<div style="position: relative;
     right: -96px;
     top: -37px;" class="col-lg-12 form-group">
-						<a class="btn btn-dark" th:href="@{/customer/change-password}">Change Password</a>
+						<a class="btn btn-dark" th:href="@{/customer/change-password}">Thay đổi mật khẩu</a>
 					</div>
 				</div>
 

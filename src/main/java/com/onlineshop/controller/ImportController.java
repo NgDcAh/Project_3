@@ -45,7 +45,7 @@ public class ImportController {
 		List<Input> inputs = inputServiceImpl.findInputByFilters(startDate, endDate, minTotalPrice, maxTotalPrice, minQuantity, maxQuantity);
 		model.addAttribute("inputs", inputs);
 		model.addAttribute("size", inputs.size());
-		model.addAttribute("result", "Result: ");
+		model.addAttribute("result", "Kết quả: ");
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
 			return "redirect:/login";

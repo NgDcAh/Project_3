@@ -38,7 +38,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	        + "JOIN user_role ur ON u.user_id = ur.user_id "
 	        + "JOIN roles r ON ur.role_id = r.role_id " 
 	        + "JOIN (SELECT user_id, SUM(total_price) AS totalPrice, SUM(quantity) AS total_quantity " +
-	               "FROM orders GROUP BY user_id) o ON u.user_id = o.user_id "  // Thêm join với tổng giá trị và tổng số lượng từ bảng orders
+	               "FROM orders o where o.order_status like '%Thành công%' and o.is_accept = 1 GROUP BY user_id) o ON u.user_id = o.user_id "  
 	        + "WHERE ((:cityName IS NULL OR :cityName = '') OR c.name LIKE CONCAT('%', :cityName, '%')) "
 	        + "AND ((:countryName IS NULL OR :countryName = '') OR co.name LIKE CONCAT('%', :countryName, '%')) "
 	        + "AND r.name = :roleName "
@@ -57,13 +57,13 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
 	
 	@Query(value = "SELECT user_id, SUM(total_price) AS total_amount_paid, SUM(quantity) AS total_products_purchased, COUNT(order_id) as totalOrder " +
-            "FROM orders " +
-            "WHERE user_id = :userId " +
+            "FROM orders o" +
+            "WHERE user_id = :userId and o.order_status like '%Thành công%' and o.is_accept = 1 " +
             "GROUP BY user_id", nativeQuery = true)
     Object getTotalAmountAndProductsByUserId(@Param("userId") Long userId);
 	
 	@Query(value = "SELECT user_id, SUM(total_price) AS total_order_price "
-			+ "FROM orders "
+			+ "FROM orders o where o.order_status like '%Thành công%' and o.is_accept = 1 "
 			+ "GROUP BY user_id "
 			+ "ORDER BY total_order_price DESC "
 			+ "LIMIT 5;", nativeQuery = true)

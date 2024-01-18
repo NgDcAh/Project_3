@@ -31,7 +31,7 @@
 				<div class="container-fluid">
 
 					<!-- Page Heading -->
-					<h1 class="h3 mb-2 text-gray-800">Import Management</h1>
+					<h1 class="h3 mb-2 text-gray-800">Danh sách đơn nhập</h1>
 					<div th:if="${success}" class="text-center alert alert-success">
 						<p th:text="${success}"></p>
 					</div>
@@ -44,30 +44,30 @@
 							<h3 th:if="${result}" th:text="${result}" class="text-center primary"></h3>
 
 							<Button type="button" class="btn btn-primary" data-toggle="modal" data-target="#filterModal"
-								style="float: right;">Filter</Button>
+								style="float: right;">Lọc</Button>
 						</div>
 						<div class="card-body">
 							<div class="table-responsive">
 								<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 									<thead>
 										<tr>
-											<th>Import Date</th>
-											<th style="width: 320px;">Product</th>
-											<th>Category</th>
-											<th>Quantity</th>
-											<th>Total Price</th>
-											<th>Action</th>
+											<th>Ngày nhập</th>
+											<th style="width: 320px;">Sản phẩm</th>
+											<th>Danh mục</th>
+											<th>Số lượng</th>
+											<th>Tổng giá trị</th>
+											<th>Thao tác</th>
 
 										</tr>
 									</thead>
 									<tfoot>
 										<tr>
-											<th>Import Date</th>
-											<th style="width: 320px;">Product</th>
-											<th>Category</th>
-											<th>Quantity</th>
-											<th>Total Price</th>
-											<th>Action</th>
+											<th>Ngày nhập</th>
+											<th style="width: 320px;">Sản phẩm</th>
+											<th>Danh mục</th>
+											<th>Số lượng</th>
+											<th>Tổng giá trị</th>
+											<th>Thao tác</th>
 										</tr>
 									</tfoot>
 									<tbody>
@@ -76,7 +76,7 @@
 											<td th:text="${input.product.name}"></td>
 											<td th:text="${input.product.category.name}"></td>
 											<td th:text="${input.quantity}"></td>
-											<td th:text="'$' + ${input.quantity * input.product.costPrice}"></td>
+											<td th:text="${input.quantity * input.product.costPrice}"></td>
 											<td></td>
 										</tr>
 									</tbody>
@@ -98,7 +98,7 @@
 				<div class="modal-dialog modal-dialog-centered" role="document">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalLongTitle">Filter</h5>
+							<h5 class="modal-title" id="exampleModalLongTitle">Lọc</h5>
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
@@ -108,11 +108,11 @@
 							<div class="mb-3">
 								<div class="form-row">
 									<div class="col-md-6 mb-3">
-										<label for="startDate" class="col-form-label">Start Date:</label>
+										<label for="startDate" class="col-form-label">Ngày bắt đầu:</label>
 										<input type="date" class="form-control" id="startDate" name="startDate">
 									</div>
 									<div class="col-md-6 mb-3">
-										<label for="endDate" class="col-form-label">End Date:</label>
+										<label for="endDate" class="col-form-label">Ngày kết thúc:</label>
 										<input type="date" class="form-control" id="endDate" name="endDate">
 									</div>
 								</div>
@@ -120,11 +120,11 @@
 							<div class="mb-3">
 								<div class="form-row">
 									<div class="col-md-6 mb-3">
-										<label for="minTotalPrice" class="col-form-label">Min Total Price:</label>
+										<label for="minTotalPrice" class="col-form-label">Giá trị tối thiểu:</label>
 										<input type="number" class="form-control" id="minTotalPrice" name="minTotalPrice">
 									</div>
 									<div class="col-md-6 mb-3">
-										<label for="maxTotalPrice" class="col-form-label">Max Total Price:</label>
+										<label for="maxTotalPrice" class="col-form-label">Giá trị tối đa:</label>
 										<input type="number" class="form-control" id="maxTotalPrice" name="maxTotalPrice">
 									</div>
 								</div>
@@ -132,18 +132,18 @@
 							<div class="mb-3">
 								<div class="form-row">
 									<div class="col-md-6 mb-3">
-										<label for="minQuantity" class="col-form-label">Min Quantity:</label>
+										<label for="minQuantity" class="col-form-label">Số lượng tối thiểu:</label>
 										<input type="number" class="form-control" id="minQuantity" name="minQuantity">
 									</div>
 									<div class="col-md-6 mb-3">
-										<label for="maxQuantity" class="col-form-label">Max Sale Price:</label>
+										<label for="maxQuantity" class="col-form-label">Số lượng tối đa:</label>
 										<input type="number" class="form-control" id="maxQuantity" name="maxQuantity">
 									</div>
 								</div>
 							</div>
 						</div>
 						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
 							<button type="submit" class="btn btn-primary">OK</button>
 						</div>
 					</div>

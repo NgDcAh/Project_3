@@ -31,7 +31,7 @@
 				<div class="container-fluid">
 
 					<!-- Page Heading -->
-					<h1 class="h3 mb-2 text-gray-800">Product Management</h1>
+					<h1 class="h3 mb-2 text-gray-800">Danh sách sản phẩm</h1>
 					<div th:if="${success}" class="text-center alert alert-success">
 						<p th:text="${success}"></p>
 					</div>
@@ -41,12 +41,12 @@
 					<!-- DataTales Example -->
 					<div class="card shadow mb-4">
 						<div class="card-header d-flex py-3 justify-content-between">
-							<a th:href="@{/admin/add-product}" class="btn btn-primary">Add Product</a>
+							<a th:href="@{/admin/add-product}" class="btn btn-primary">Thêm mới</a>
 							
 							<h3 th:if="${result}" th:text="${result}" class="text-center primary"></h3>
 
 							<Button type="button" class="btn btn-primary" data-toggle="modal" data-target="#filterModal"
-								style="float: right;">Filter</Button>
+								style="float: right;">Lọc</Button>
 						</div>
 
 						<div class="card-body">
@@ -54,27 +54,27 @@
 								<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 									<thead>
 										<tr>
-											<th style="width: 320px;">Name</th>
-											<th>Category</th>
-											<th>Brand</th>
-											<th>CostPrice</th>
-											<th>SalePrice</th>
-											<th>Quantity</th>
-											<th>Image</th>
-											<th>Action</th>
+											<th style="width: 320px;">Tên</th>
+											<th>Danh mục</th>
+											<th>Thương hiệu</th>
+											<th>Giá nhập</th>
+											<th>Giá bán</th>
+											<th>Số lượng</th>
+											<th>Ảnh</th>
+											<th>Thao tác</th>
 
 										</tr>
 									</thead>
 									<tfoot>
 										<tr>
-											<th style="width: 320px;">Name</th>
-											<th>Category</th>
-											<th>Brand</th>
-											<th>CostPrice</th>
-											<th>SalePrice</th>
-											<th>Quantity</th>
-											<th>Image</th>
-											<th>Action</th>
+											<th style="width: 320px;">Tên</th>
+											<th>Danh mục</th>
+											<th>Thương hiệu</th>
+											<th>Giá nhập</th>
+											<th>Giá bán</th>
+											<th>Số lượng</th>
+											<th>Ảnh</th>
+											<th>Thao tác</th>
 										</tr>
 									</tfoot>
 									<tbody>
@@ -91,16 +91,16 @@
 											</td>
 											<td>
 												<a th:href="@{/admin/update-product/{id}(id= ${product.id})}"
-													class="btn btn-primary">Update</a>
+													class="btn btn-primary">Cập nhật</a>
 												<a id="importButton"
 													th:href="@{/admin/findProductById(id=${product.id})}"
-													class="btn btn-primary">Import</a>
+													class="btn btn-primary">Thêm</a>
 												<a th:if="${product.deleted} == true"
 													th:href="@{/admin/enable-product(id = ${product.id})}"
-													class="btn btn-primary">Enable</a>
+													class="btn btn-primary">Cho phép</a>
 												<a th:if="${product.deleted} == false"
 													th:href="@{/admin/delete-product(id = ${product.id})}"
-													class=" btn btn-danger">Delete</a>
+													class=" btn btn-danger">Xóa</a>
 
 											</td>
 										</tr>
@@ -129,7 +129,7 @@
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h5 class="modal-title" id="editModalLabel">Import Product</h5>
+							<h5 class="modal-title" id="editModalLabel">Thêm</h5>
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
 									aria-hidden="true">&times;</span></button>
 						</div>
@@ -140,19 +140,19 @@
 							</div>
 
 							<div class="mb-3">
-								<label for="nameEdit" class="col-form-label">Name:</label>
+								<label for="nameEdit" class="col-form-label">Tên:</label>
 								<input type="text" class="form-control" id="nameEdit" name="name" readonly>
 							</div>
 
 							<div class="mb-3">
-								<label for="quantity" class="col-form-label">Quantity:</label>
+								<label for="quantity" class="col-form-label">Số lượng:</label>
 								<input type="text" class="form-control" id="quantity" name="quantity">
 							</div>
 
 						</div>
 						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-							<button type="submit" class="btn btn-primary">Import</button>
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+							<button type="submit" class="btn btn-primary">Thêm</button>
 						</div>
 					</div>
 				</div>
@@ -167,14 +167,14 @@
 				<div class="modal-dialog modal-dialog-centered" role="document">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalLongTitle">Filter</h5>
+							<h5 class="modal-title" id="exampleModalLongTitle">Lọc</h5>
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
 						</div>
 						<div class="modal-body">
 							<div class="mb-3">
-								<label for="category" class="col-form-label">Category:</label>
+								<label for="category" class="col-form-label">Danh mục:</label>
 								<select id="category" name="category" class="form-control">
 									<option th:value="null">-SELECT-</option>
 									<option th:each="category : ${categories}" th:value="${category.name}"
@@ -183,17 +183,17 @@
 								</select>
 							</div>
 							<div class="mb-3">
-								<label for="brand" class="col-form-label">Brand:</label>
+								<label for="brand" class="col-form-label">Thương hiệu:</label>
 								<input type="text" class="form-control" id="brand" name="brand">
 							</div>
 							<div class="mb-3">
 								<div class="form-row">
 									<div class="col-md-6 mb-3">
-										<label for="minCostPrice" class="col-form-label">Min Cost Price:</label>
+										<label for="minCostPrice" class="col-form-label">Giá nhập tối thiểu:</label>
 										<input type="number" class="form-control" id="minCostPrice" name="minCostPrice">
 									</div>
 									<div class="col-md-6 mb-3">
-										<label for="maxCostPrice" class="col-form-label">Max Cost Price:</label>
+										<label for="maxCostPrice" class="col-form-label">Giá nhập tối đa:</label>
 										<input type="number" class="form-control" id="maxCostPrice" name="maxCostPrice">
 									</div>
 								</div>
@@ -201,11 +201,11 @@
 							<div class="mb-3">
 								<div class="form-row">
 									<div class="col-md-6 mb-3">
-										<label for="minSalePrice" class="col-form-label">Min Sale Price:</label>
+										<label for="minSalePrice" class="col-form-label">Giá bán tối thiểu:</label>
 										<input type="number" class="form-control" id="minSalePrice" name="minSalePrice">
 									</div>
 									<div class="col-md-6 mb-3">
-										<label for="maxSalePrice" class="col-form-label">Max Sale Price:</label>
+										<label for="maxSalePrice" class="col-form-label">Giá bán tối đa:</label>
 										<input type="number" class="form-control" id="maxSalePrice" name="maxSalePrice">
 									</div>
 								</div>
@@ -213,18 +213,18 @@
 							<div class="mb-3">
 								<div class="form-row">
 									<div class="col-md-6 mb-3">
-										<label for="minQuantity" class="col-form-label">Min Quantity:</label>
+										<label for="minQuantity" class="col-form-label">Số lượng tối thiểu:</label>
 										<input type="number" class="form-control" id="minQuantity" name="minQuantity">
 									</div>
 									<div class="col-md-6 mb-3">
-										<label for="maxQuantity" class="col-form-label">Max Quantity:</label>
+										<label for="maxQuantity" class="col-form-label">Số lượng tối đa:</label>
 										<input type="number" class="form-control" id="maxQuantity" name="maxQuantity">
 									</div>
 								</div>
 							</div>
 						</div>
 						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
 							<button type="submit" class="btn btn-primary">OK</button>
 						</div>
 					</div>

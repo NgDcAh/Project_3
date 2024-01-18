@@ -35,12 +35,12 @@ public interface ProductRepository extends JpaRepository<Product, Long>{
 
 	@Query(value = "select "
 			+ "p.product_id, p.name, p.description, p.current_quantity, p.brand, p.cost_price, p.category_id, p.sale_price, p.image, p.is_activated, p.is_deleted "
-			+ "from products p where p.is_deleted = false and p.is_activated = true order by p.cost_price desc ", nativeQuery = true)
+			+ "from products p where p.is_deleted = false and p.is_activated = true order by p.sale_price desc ", nativeQuery = true)
 	List<Product> filterHighProducts();
 
 	@Query(value = "select "
 			+ "p.product_id, p.name, p.description, p.current_quantity, p.brand, p.cost_price, p.category_id, p.sale_price, p.image, p.is_activated, p.is_deleted "
-			+ "from products p where p.is_deleted = false and p.is_activated = true order by p.cost_price asc ", nativeQuery = true)
+			+ "from products p where p.is_deleted = false and p.is_activated = true order by p.sale_price asc ", nativeQuery = true)
 	List<Product> filterLowerProducts();
 
 	@Query(value = "select p.product_id, p.name,p.brand, p.description, p.current_quantity, p.cost_price, p.category_id, p.sale_price, p.image, p.is_activated, p.is_deleted from products p where p.is_deleted = false and p.is_activated = true limit 4", nativeQuery = true)
@@ -69,8 +69,8 @@ public interface ProductRepository extends JpaRepository<Product, Long>{
 	List<Map<String, Object>> getTop8Products();
 	
 	@Query(value = "SELECT SUM(quantity) AS total_quantity_sold " +
-	        "FROM orders " +
-	        "WHERE MONTH(order_date) = :month AND YEAR(order_date) = :year", nativeQuery = true)
+	        "FROM orders o " +
+	        "WHERE MONTH(o.order_complete) = :month AND YEAR(o.order_complete) = :year and o.order_status like '%Thành công%' and o.is_accept = 1", nativeQuery = true)
 	Integer getQuantityProductsSoldByMonthAndYear(@Param("month") Integer month, @Param("year") Integer year);
 	
 	@Query(value = "SELECT p.* FROM products p " +

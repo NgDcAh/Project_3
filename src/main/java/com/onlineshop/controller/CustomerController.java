@@ -84,7 +84,7 @@ public class CustomerController {
             }
             customerServiceImpl.update(customerDto);
             UserDto customerUpdate = customerServiceImpl.getUserDto(principal.getName());
-            attributes.addFlashAttribute("success", "Update successfully!");
+            attributes.addFlashAttribute("success", "Cập nhật thành công!");
             model.addAttribute("customer", customerUpdate);
             return "redirect:/customer/profile";
         }
@@ -114,13 +114,13 @@ public class CustomerController {
             if (passwordEncoder.matches(oldPassword, customer.getPassword())
                     && !passwordEncoder.matches(newPassword, oldPassword)
                     && !passwordEncoder.matches(newPassword, customer.getPassword())
-                    && repeatPassword.equals(newPassword) && newPassword.length() >= 5) {
+                    && repeatPassword.equals(newPassword)) {
                 customer.setPassword(passwordEncoder.encode(newPassword));
                 customerServiceImpl.changePass(customer);
-                attributes.addFlashAttribute("success", "Your password has been changed successfully!");
+                attributes.addFlashAttribute("success", "Thay đổi mật khẩu thành công!");
                 return "redirect:/customer/profile";
             } else {
-                model.addAttribute("message", "Your password is wrong");
+                model.addAttribute("message", "Sai mật khẩu");
                 return "change-password";
             }
         }
@@ -158,7 +158,7 @@ public class CustomerController {
         List<City> cities = cityServiceImpl.findAll();
         model.addAttribute("countries", countryList);
         model.addAttribute("cities", cities);
-        model.addAttribute("result", "Result:");
+        model.addAttribute("result", "Kết quả:");
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
 			return "redirect:/login";
@@ -199,18 +199,18 @@ public class CustomerController {
 			if (customer != null) {
 				model.addAttribute("customerDto", customerDto);
 				System.out.println("customer not null");
-				model.addAttribute("usernameError", "Username has been already!");
+				model.addAttribute("usernameError", "Email đã tồn tại!");
 				return "add-customer";
 			}
 			if (customerDto.getPassword().equals(customerDto.getConfirmPassword())) {
 				customerDto.setPassword(passwordEncoder.encode(customerDto.getPassword()));
 				customerServiceImpl.saveCustomer(customerDto);
 				System.out.println("success");
-				model.addAttribute("success", "Successfully!");
+				model.addAttribute("success", "Thêm thành công!");
 				model.addAttribute("customerDto", customerDto);
 			} else {
 				model.addAttribute("customerDto", customerDto);
-				model.addAttribute("passwordError", "Your password maybe wrong! Check again!");
+				model.addAttribute("passwordError", "Mật khẩu sai!");
 				System.out.println("password not same");
 				return "add-customer";
 			}
@@ -242,7 +242,7 @@ public class CustomerController {
 			RedirectAttributes redirectAttributes) {
 		try {
 			customerServiceImpl.update(customerDto);
-			redirectAttributes.addFlashAttribute("success", "Update successfully!");
+			redirectAttributes.addFlashAttribute("success", "Cập nhật thành công!");
 		} catch (Exception e) {
 			e.printStackTrace();
 			redirectAttributes.addFlashAttribute("error", "Error server, please try again!");
@@ -254,7 +254,7 @@ public class CustomerController {
 	public String removeCustomerString (Long id, RedirectAttributes redirectAttributes) {
 		try {
 			customerServiceImpl.remove(id);
-			redirectAttributes.addFlashAttribute("success", "Deleted successfully!");
+			redirectAttributes.addFlashAttribute("success", "Xóa thành công!");
 		}
 		catch (Exception e) {
 			e.printStackTrace();

@@ -19,13 +19,13 @@
 			<div class="container">
 				<div class="row px-4 px-lg-5 py-lg-4 align-items-center">
 					<div class="col-lg-6">
-						<h1 class="h2 text-uppercase mb-0">Shop</h1>
+						<h1 class="h2 text-uppercase mb-0">Cửa hàng</h1>
 					</div>
 					<div class="col-lg-6 text-lg-end">
 						<nav aria-label="breadcrumb">
 							<ol class="breadcrumb justify-content-lg-end mb-0 px-0 bg-light">
-								<li class="breadcrumb-item"><a class="text-dark" href="index.html">Home</a></li>
-								<li class="breadcrumb-item active" aria-current="page">Shop</li>
+								<li class="breadcrumb-item"><a class="text-dark" href="index.html">Trang chủ</a></li>
+								<li class="breadcrumb-item active" aria-current="page">Cửa hàng</li>
 							</ol>
 						</nav>
 					</div>
@@ -37,7 +37,7 @@
 				<div class="row">
 					<!-- SHOP SIDEBAR-->
 					<div class="col-lg-3 order-2 order-lg-1">
-						<h5 class="text-uppercase mb-4">Categories</h5>
+						<h5 class="text-uppercase mb-4">Danh mục</h5>
 
 						<ul th:each="category : ${categories}"
 							class="list-unstyled small text-muted ps-lg-4 font-weight-normal">
@@ -46,25 +46,25 @@
 
 						</ul>
 
-						<h6 class="text-uppercase mb-4">Price range</h6>
+						<h6 class="text-uppercase mb-4">Giá tiền</h6>
 						<div class="price-range mb-5">
 							<div class="row pt-2">
 								<form th:action="@{/products/in-range/0}" method="get"
 									style="display: flex; flex-wrap: wrap;">
 									<div style="flex: 0 0 50%;">
-										<strong class="small fw-bold text-uppercase">From</strong>
+										<strong class="small fw-bold text-uppercase">Từ</strong>
 										<input style="width: 80px;" type="text" class="form-control rounded"
 											placeholder="0.0" name="minSalePrice" aria-label="Search"
 											aria-describedby="search-addon" />
 									</div>
 									<div style="flex: 0 0 50%;">
-										<strong class="small fw-bold text-uppercase">To</strong>
+										<strong class="small fw-bold text-uppercase">Đến</strong>
 										<input style="width: 80px;" type="text" class="form-control rounded"
 											placeholder="100.0" name="maxSalePrice" aria-label="Search"
 											aria-describedby="search-addon" />
 									</div>
 									<div style="flex: 0 0 100%; margin-top: 10px;">
-										<button type="submit" class="btn btn-outline-primary">Filter</button>
+										<button type="submit" class="btn btn-outline-primary">Lọc</button>
 									</div>
 								</form>
 							</div>
@@ -78,24 +78,23 @@
 								<form style="display: flex;" th:action="@{/search-products/0}" method="get">
 									<input type="text" class="form-control rounded" placeholder="Search" name="keyword"
 										aria-label="Search" aria-describedby="search-addon" />
-									<button type="submit" class="btn btn-outline-primary">Search</button>
+									<button type="submit" class="btn btn-outline-primary">Tiềm kiếm</button>
 								</form>
 							</div>
 							<div class="col-lg-6">
 								<ul class="list-inline d-flex align-items-center justify-content-lg-end mb-0">
 									<li class="list-inline-item">
 										<select class="selectpicker" data-customclass="form-control form-control-sm">
-											<option value>Sort By </option>
-											<option value="default">Default sorting </option>
-											<option value="popularity">Popularity </option>
-											<option value="low-high">Price: Low to High </option>
-											<option value="high-low">Price: High to Low </option>
+											<option value>Sắp xếp theo giá</option>
+											<option value="/products/0">Mặc định</option>
+											<option value="/lower-price/0">Từ thấp đến cao</option>
+											<option value="/high-price/0">Từ cao đến tháp</option>
 										</select>
 									</li>
 								</ul>
 							</div>
 						</div>
-						<h5 class="text-dark" th:text="'Result for &quot;' + ${keyword} + '&quot;'"></h5>
+						<h5 class="text-dark" th:text="'Kết quả cho &quot;' + ${keyword} + '&quot;'"></h5>
 						<div class="row">
 							<!-- PRODUCT-->
 							<div class="col-lg-4 col-sm-6" th:each="product : ${products}">
@@ -109,7 +108,7 @@
 											<ul class="mb-0 list-inline">
 
 												<li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-dark"
-														th:href="@{/add-to-cart}" method="post">Add to cart</a></li>
+														th:href="@{/add-to-cart}" method="post">Thêm vào giỏ</a></li>
 
 											</ul>
 										</div>
@@ -123,16 +122,16 @@
 							<nav aria-label="Page navigation example">
 								<ul class="pagination justify-content-center justify-content-lg-end">
 									<li th:if="${currentPage != 0}" class="page-item mx-1"><a class="page-link"
-											th:href="@{'/search-product/' + ${currentPage - 1}}"
+											th:href="@{'/search-products/' + ${currentPage - 1} + '?keyword=' + ${keyword}}"
 											aria-label="Previous"><span aria-hidden="true">«</span></a>
 									</li>
 									<li th:each="i : ${#numbers.sequence(1, totalPages)}"
 										th:classappend="${currentPage == i - 1 ? 'active' : ''}"
-										class="page-item mx-1 active"><a th:href="@{'/search-product/' + ${i - 1}}"
+										class="page-item mx-1 active"><a th:href="@{'/search-products/' + ${i - 1} +'?keyword=' + ${keyword}}"
 											class="page-link" th:text="${i}">1</a></li>
 
 									<li th:if="${currentPage + 1 != totalPages}" class="page-item ms-1"><a
-											class="page-link" th:href="@{'/search-product/' + ${currentPage + 1}}"
+											class="page-link" th:href="@{'/search-products/' + ${currentPage + 1} +'?keyword=' + ${keyword}}"
 											aria-label="Next"><span aria-hidden="true">»</span></a></li>
 								</ul>
 							</nav>

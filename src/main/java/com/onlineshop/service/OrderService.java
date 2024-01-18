@@ -7,7 +7,7 @@ import com.onlineshop.model.Order;
 import com.onlineshop.model.User;
 
 public interface OrderService {
-	Order save(User user, ShoppingCartDto shoppingCartDto);
+	Order save(User user, ShoppingCartDto shoppingCartDto, String paymentMethod);
 
     List<Order> findAll(String username);
 

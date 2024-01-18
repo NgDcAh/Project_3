@@ -14,4 +14,7 @@ import com.onlineshop.model.OrderDetail;
 public interface OrderDetailRepository extends JpaRepository<OrderDetail, Long>{
 	@Query("select o from Order o where o.user.id = ?1")
     List<Order> findAllByCustomerId(Long id);
+	
+	@Query(value = "select ot.* from order_detail ot where order_id = ?1", nativeQuery = true)
+	List<OrderDetail> findOrderDetailByOrderId(long id);
 }
